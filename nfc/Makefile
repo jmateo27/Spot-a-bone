@@ -2,19 +2,16 @@ CC_C = arm-linux-gnueabihf-gcc
 CFLAGS = -Wall -g -std=c99 -D _POSIX_C_SOURCE=200809L -Werror
 HOME = /home/jmateo
 
-all: nfc deploy
+all: clean nfcReader deploy
 
-run: nfc
-	./nfc
+nfcReader: nfcReader.o
+	$(CC_C) $(CFLAGS) -o nfcReader nfcReader.o -lm -lnfc
 
-hello:
-	$(CC_C) $(CFLAGS) nfc.c -o nfc
-
-# nfc.o:
-# 	$(CC_C) $(CFLAGS) -c nfc.c
+nfcReader.o:
+	$(CC_C) $(CFLAGS) -c nfcReader.c
 
 deploy:
-	cp nfc $(HOME)/cmpt433/public/myApps/
+	cp nfcReader $(HOME)/cmpt433/public/myApps/
 
 clean:
-	rm -rf nfc *.o *~
+	rm -rf nfcReader *.o *~

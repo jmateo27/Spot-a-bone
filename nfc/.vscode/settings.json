@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "nfc.h": "c",
+        "i2c-dev.h": "c",
+        "stdio.h": "c"
+    }
+}
