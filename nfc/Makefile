@@ -4,8 +4,11 @@ HOME = /home/jmateo
 
 all: clean nfcReader deploy
 
-nfcReader: nfcReader.o
-	$(CC_C) $(CFLAGS) -o nfcReader nfcReader.o -lm -lnfc
+nfcReader: nfcReader.o nfc-utils.o
+	$(CC_C) $(CFLAGS) -o nfcReader nfcReader.o nfc-utils.o -lm -lnfc
+
+nfc-utils.o:
+	$(CC_C) $(CFLAGS) -c utils/nfc-utils.c
 
 nfcReader.o:
 	$(CC_C) $(CFLAGS) -c nfcReader.c

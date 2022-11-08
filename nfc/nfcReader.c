@@ -50,20 +50,30 @@ int main(int argc, const char *argv[])
 		.nmt = NMT_ISO14443A,
 		.nbr = NBR_106,
 	};
+
+	int tagNumber = 0;
+
 	if (nfc_initiator_select_passive_target(pnd, nmMifare, NULL, 0, &nt) > 0)
 	{
-		printf("The following (NFC) ISO14443A tag was found:\n");
-		printf("    ATQA (SENS_RES): ");
-		print_hex(nt.nti.nai.abtAtqa, 2);
-		printf("       UID (NFCID%c): ", (nt.nti.nai.abtUid[0] == 0x08 ? '3' : '1'));
-		print_hex(nt.nti.nai.abtUid, nt.nti.nai.szUidLen);
-		printf("      SAK (SEL_RES): ");
-		print_hex(&nt.nti.nai.btSak, 1);
-		if (nt.nti.nai.szAtsLen)
-		{
-			printf("          ATS (ATR): ");
-			print_hex(nt.nti.nai.abtAts, nt.nti.nai.szAtsLen);
+		tagNumber = findOutWhichTag(nt.nti.nai.abtUid, nt.nti.nai.szUidLen);
+		if (tagNumber == -1){
+			printf("Tag found is not in the database...\n");
 		}
+		else{
+			printf("Tag #%d found!\n", tagNumber);
+		}
+		// printf("The following (NFC) ISO14443A tag was found:\n");
+		// printf("    ATQA (SENS_RES): ");
+		// print_hex(nt.nti.nai.abtAtqa, 2);
+		// printf("       UID (NFCID%c): ", (nt.nti.nai.abtUid[0] == 0x08 ? '3' : '1'));
+		// print_hex(nt.nti.nai.abtUid, nt.nti.nai.szUidLen);
+		// printf("      SAK (SEL_RES): ");
+		// print_hex(&nt.nti.nai.btSak, 1);
+		// if (nt.nti.nai.szAtsLen)
+		// {
+		// 	printf("          ATS (ATR): ");
+		// 	print_hex(nt.nti.nai.abtAts, nt.nti.nai.szAtsLen);
+		// }
 	}
 	// Close NFC device
 	nfc_close(pnd);
@@ -72,68 +82,34 @@ int main(int argc, const char *argv[])
 	exit(EXIT_SUCCESS);
 }
 
-// static int initI2cBus(char *bus, int address)
-// {
-// 	int i2cFileDesc = open(bus, O_RDWR);
-// 	if (i2cFileDesc < 0)
-// 	{
-// 		printf("I2C DRV: Unable to open bus for read/write (%s)\n", bus);
-// 		perror("Error is:");
-// 		exit(-1);
-// 	}
-
-// 	int result = ioctl(i2cFileDesc, I2C_SLAVE, address);
-// 	if (result < 0)
-// 	{
-// 		perror("Unable to set I2C device to slave address.");
-// 		exit(-1);
-// 	}
-// 	return i2cFileDesc;
-// }
-
-// void writeI2cReg(int i2cFileDesc, unsigned char regAddr, unsigned char value)
-// {
-// 	unsigned char buff[2];
-// 	buff[0] = regAddr;
-// 	buff[1] = value;
-// 	int res = write(i2cFileDesc, buff, 2);
-// 	if (res != 2)
-// 	{
-// 		perror("I2C: Unable to write i2c register.");
-// 		exit(1);
-// 	}
-// }
-
-// static unsigned char readI2cReg(int i2cFileDesc, unsigned char regAddr)
-// {
-// 	// To read a register, must first write the address
-// 	int res = write(i2cFileDesc, &regAddr, sizeof(regAddr));
-// 	if (res != sizeof(regAddr))
-// 	{
-// 		perror("Unable to write i2c register.");
-// 		exit(-1);
-// 	}
-
-// 	// Now read the value and return it
-// 	char value = 0;
-// 	res = read(i2cFileDesc, &value, sizeof(value));
-// 	if (res != sizeof(value))
-// 	{
-// 		perror("Unable to read i2c register");
-// 		exit(-1);
-// 	}
-// 	return value;
-// }
-
-static void print_hex(const uint8_t *pbtData, const size_t szBytes)
-{
+int findOutWhichTag(const uint8_t *pbtData, const size_t szBytes){
 	size_t szPos;
-	for (szPos = 0; szPos < szBytes; szPos++)
-	{
-		printf("%02x  ", pbtData[szPos]);
+	bool equal = true;
+	for (int i = 0; i < numTags; i++){
+		equal = true;
+		for (szPos = 0; szPos < szBytes; szPos++)
+		{
+			if (pbtData[szPos] != tagDatabase[i].UID[szPos]){
+				equal = false;
+				break;
+			}
+		}
+		if (equal){
+			return i+1;
+		}
 	}
-	printf("\n");
+	return -1;
 }
+
+// static void print_hex(const uint8_t *pbtData, const size_t szBytes)
+// {
+// 	size_t szPos;
+// 	for (szPos = 0; szPos < szBytes; szPos++)
+// 	{
+// 		printf("%02x  ", pbtData[szPos]);
+// 	}
+// 	printf("\n");
+// }
 
 void runCommand(char *command)
 {
