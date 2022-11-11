@@ -2,6 +2,7 @@
 #define MOTIONSENSOR_H_
 
 #include <stdio.h>
+#include <stdlib.h>
 
 void motionSensor_initiate();
 
