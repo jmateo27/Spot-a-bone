@@ -25,7 +25,6 @@ void *threadMotionSensor(void *arg){
     int motion = 0;
     while(1){
         motion = motionSensor_isThereMotion();
-        printf("%d\n", motion);
         if (motion == 1){
             printf("Motion detected!\n");
         }
