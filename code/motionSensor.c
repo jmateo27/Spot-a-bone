@@ -1,13 +1,13 @@
 #include "includes/motionSensor.h"
 
-#define motionSensor_pathValue "/sys/class/gpio/gpio112/value"
-#define motionSensor_pathactiveLow "/sys/class/gpio/gpio112/active_low"
-#define motionSensor_pathDirection "/sys/class/gpio/gpio112/direction"
+#define motionSensor_pathValue "/sys/class/gpio/gpio27/value"
+#define motionSensor_pathactiveLow "/sys/class/gpio/gpio27/active_low"
+#define motionSensor_pathDirection "/sys/class/gpio/gpio27/direction"
 #define MAX_LENGTH 16
 void motionSensor_initiate(){
-	motionSensor_runCommand("config-pin P9.30 gpio");
+	motionSensor_runCommand("config-pin P9.17 gpio");
 	motionSensor_writeToFile(motionSensor_pathDirection, "in");
-    motionSensor_writeToFile(motionSensor_pathactiveLow, "1");
+    motionSensor_writeToFile(motionSensor_pathactiveLow, "0");
 }
 
 int motionSensor_isThereMotion(){

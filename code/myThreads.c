@@ -20,7 +20,7 @@ void *threadNFC(void *arg){
 void *threadMotionSensor(void *arg){
     motionSensor_initiate();
     printf("Calibrating motion sensor\n");
-    sleep(oneMin*60*1000);
+    sleep(oneMin);
     printf("Finished calibrating motion sensor\n");
     int motion = 0;
     while(1){
