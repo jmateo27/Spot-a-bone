@@ -17,7 +17,7 @@ int motionSensor_isThereMotion(){
         exit(-1);
     }
     // Read string (line)
-	int maxlen = 3600;
+	int maxlen = 16;
     char result[maxlen];
     fgets(result, maxlen, pFile);
     // Close
