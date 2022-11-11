@@ -3,7 +3,7 @@
 #define motionSensor_pathValue "/sys/class/gpio/gpio27/value"
 #define motionSensor_pathactiveLow "/sys/class/gpio/gpio27/active_low"
 #define motionSensor_pathDirection "/sys/class/gpio/gpio27/direction"
-#define MAX_LENGTH 16
+
 void motionSensor_initiate(){
 	motionSensor_runCommand("config-pin P9.17 gpio");
 	motionSensor_writeToFile(motionSensor_pathDirection, "in");
@@ -17,8 +17,9 @@ int motionSensor_isThereMotion(){
         exit(-1);
     }
     // Read string (line)
-    char result[MAX_LENGTH];
-    fgets(result, MAX_LENGTH, pFile);
+	int maxlen = 3600;
+    char result[maxlen];
+    fgets(result, maxlen, pFile);
     // Close
     fclose(pFile);
     if (result[0] == '1')
