@@ -20,14 +20,28 @@ void *threadNFC(void *arg){
 void *threadMotionSensor(void *arg){
     motionSensor_initiate();
     printf("Calibrating motion sensor\n");
-    sleep(oneMin);
+    sleepForMs(10);
     printf("Finished calibrating motion sensor\n");
     int motion = 0;
     while(1){
         motion = motionSensor_isThereMotion();
         if (motion == 1){
             printf("Motion detected!\n");
+            printf("Timer on waiting for 1s\n");
+            sleepForMs(1000);
+            printf("Now reading....\n");
         }
     }
     return NULL;
+}
+
+void sleepForMs(long long delayInMs)
+{
+    const long long NS_PER_MS = 1000 * 1000;
+    const long long NS_PER_SECOND = 1000000000;
+    long long delayNs = delayInMs * NS_PER_MS;
+    int seconds = delayNs / NS_PER_SECOND;
+    int nanoseconds = delayNs % NS_PER_SECOND;
+    struct timespec reqDelay = {seconds, nanoseconds};
+    nanosleep(&reqDelay, (struct timespec *) NULL);
 }
