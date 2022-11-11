@@ -5,7 +5,7 @@
 #define motionSensor_pathDirection "/sys/class/gpio/gpio27/direction"
 
 void motionSensor_initiate(){
-	motionSensor_runCommand("config-pin P9.17 gpio");
+	motionSensor_runCommand("config-pin P8.17 gpio");
 	motionSensor_writeToFile(motionSensor_pathDirection, "in");
     motionSensor_writeToFile(motionSensor_pathactiveLow, "0");
 }
