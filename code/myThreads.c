@@ -22,14 +22,20 @@ void *threadMotionSensor(void *arg){
     printf("Calibrating motion sensor\n");
     sleepForMs(10);
     printf("Finished calibrating motion sensor\n");
-    int motion = 0;
+    int motion = 0, pirState = 0;
     while(1){
         motion = motionSensor_isThereMotion();
         if (motion == 1){
-            printf("Motion detected!\n");
-            printf("Timer on waiting for 1s\n");
-            sleepForMs(1000);
-            printf("Now reading....\n");
+            if (pirState == 0){
+                printf("Motion detected!\n");
+                pirState = 1;
+            }
+        }
+        else{
+            if (pirState == 1){
+                printf("Motion ended!\n");
+                pirState = 0;
+            }
         }
     }
     return NULL;
