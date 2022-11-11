@@ -3,6 +3,12 @@
 
 #include <stdio.h>
 
+void motionSensor_initiate();
+
+int motionSensor_isThereMotion();
+
+void motionSensor_writeToFile(char *fileName, char *toWrite);
+
 void motionSensor_runCommand(char *command);
 
 #endif

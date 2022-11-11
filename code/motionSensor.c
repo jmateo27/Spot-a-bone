@@ -1,5 +1,44 @@
 #include "includes/motionSensor.h"
 
+#define motionSensor_pathValue "/sys/class/gpio/gpio112/value"
+#define motionSensor_pathactiveLow "/sys/class/gpio/gpio112/active_low"
+#define motionSensor_pathDirection "/sys/class/gpio/gpio112/direction"
+#define MAX_LENGTH 16
+void motionSensor_initiate(){
+	motionSensor_runCommand("config-pin P9.30 gpio");
+	motionSensor_writeToFile(motionSensor_pathDirection, "in");
+    motionSensor_writeToFile(motionSensor_pathactiveLow, "1");
+}
+
+int motionSensor_isThereMotion(){
+    FILE *pFile = fopen(motionSensor_pathValue, "r");
+    if (pFile == NULL) {
+        printf("ERROR: Unable to open file (%s) for read\n", motionSensor_pathValue);
+        exit(-1);
+    }
+    // Read string (line)
+    char result[MAX_LENGTH];
+    fgets(result, MAX_LENGTH, pFile);
+    // Close
+    fclose(pFile);
+    if (result[0] == '1')
+        return 1;
+    else   
+        return 0;
+}
+
+void motionSensor_writeToFile(char *fileName, char *toWrite){
+    FILE *pFile = fopen(fileName, "w");
+    if (pFile == NULL) {
+        printf("ERROR: Unable to open export file.\n");
+        exit(1);
+    }
+
+    fprintf(pFile, toWrite);
+
+    fclose(pFile);
+}
+
 void motionSensor_runCommand(char *command)
 {
 	// Execute the shell command (output into pipe)

@@ -1,5 +1,7 @@
 #include "includes/myThreads.h"
 
+#define oneMin 1
+
 void *threadNFC(void *arg){
     NFC_descriptor *descPtr = (NFC_descriptor *) arg;
     int tagNum = 0, prevTagNum = 0;
@@ -10,6 +12,19 @@ void *threadNFC(void *arg){
             if (tagNum != 0)
                 prevTagNum = tagNum;
             NFC_queueUp(tagNum);
+        }
+    }
+    return NULL;
+}
+
+void *threadMotionSensor(void *arg){
+    motionSensor_initiate();
+    sleep(oneMin*60*1000);
+    int motion = 0;
+    while(1){
+        motion = motionSensor_isThereMotion();
+        if (motion == 1){
+            printf("Motion detected!\n");
         }
     }
     return NULL;
