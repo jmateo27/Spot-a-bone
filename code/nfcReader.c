@@ -10,9 +10,10 @@ int maxTagTens = 2;
 
 char *queueFileName = "/mnt/remote/myApps/NFC.txt";
 
-void NFC_initialize(NFC_descriptor* desc){
+void NFC_init(NFC_descriptor* desc){
 	NFC_runCommand("config-pin P9_18 i2c");
 	NFC_runCommand("config-pin P9_17 i2c");
+	Socket_init();
 
 	// Initialize libnfc and set the nfc_context
 	nfc_init(&(desc->cont));
@@ -60,13 +61,13 @@ int NFC_poll(NFC_descriptor* desc){
 	return tagNumber;
 }
 
-void NFC_end(NFC_descriptor* desc){
+void NFC_cleanup(NFC_descriptor* desc){
 	// Close NFC device
 	nfc_close(desc->dev);
 	// Release the context
 	nfc_exit(desc->cont);
+	Socket_cleanup();
 }
-
 
 int NFC_findOutWhichTag(const uint8_t *pbtData, const size_t szBytes){
 	size_t szPos;
@@ -88,14 +89,15 @@ int NFC_findOutWhichTag(const uint8_t *pbtData, const size_t szBytes){
 }
 
 void NFC_queueUp(int tagNum){
-	FILE *pFile;
-	while((pFile = fopen(queueFileName, "ab")) == NULL); // Wait if cannot open... (somewhat like a mutex)
+	// FILE *pFile;
+	// while((pFile = fopen(queueFileName, "ab")) == NULL); // Wait if cannot open... (somewhat like a mutex)
 	
 	char toWrite[maxTagTens];
 	sprintf(toWrite, "%d\n", tagNum);
-    fprintf(pFile, toWrite);
+	Socket_send(toWrite);
+    // fprintf(pFile, toWrite);
 
-    fclose(pFile);
+    // fclose(pFile);
 }
 
 

@@ -10,6 +10,8 @@
 #include <linux/i2c-dev.h>
 #include <nfc/nfc.h>
 
+#include "socketIO.h"
+
 #define UID_len 7
 
 typedef struct{
@@ -24,10 +26,10 @@ typedef struct{
 	nfc_context *cont;
 } NFC_descriptor;
 
-void NFC_initialize(NFC_descriptor* desc);
+void NFC_init(NFC_descriptor* desc);
 int NFC_poll(NFC_descriptor* desc);
 int NFC_findOutWhichTag(const uint8_t *pbtData, const size_t szBytes);
-void NFC_end(NFC_descriptor* desc);
+void NFC_cleanup(NFC_descriptor* desc);
 void NFC_queueUp(int tagNum);
 void NFC_runCommand(char* command);
 
