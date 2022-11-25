@@ -10,8 +10,6 @@
 #include <linux/i2c-dev.h>
 #include <nfc/nfc.h>
 
-#include "socketIO.h"
-
 #define UID_len 7
 
 typedef struct{

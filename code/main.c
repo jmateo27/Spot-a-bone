@@ -21,7 +21,7 @@ int main(){
     while(!readButton(BUTTON_pathValue));
     pthread_cancel(nfc_t);
     // pthread_cancel(motionSensor_t);
-    NFC_end(&nfc_desc);  
+    NFC_end(&nfc_desc);
     printf("Ending... Goodbye!\n");
     return 0;
 }
