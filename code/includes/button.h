@@ -2,6 +2,7 @@
 #define BUTTON_H_
 // Needed for exit() and etc.
 #include <stdlib.h>
+#include "common.h"
 
 // Paths of button characteristics that need to be set
 #define BUTTON_pathValue "/sys/class/gpio/gpio72/value"
@@ -10,13 +11,9 @@
 
 static const int MAX_LENGTH = 1024;
 
-void button_initiate();
-// Will write the string toWrite into the file designated in fileName
-void writeToFile(char *fileName, char *toWrite);
+void Button_init();
 
 // Will return the integer form of the reading from fileName
-int readButton(char *fileName);
-
-void button_runCommand(char *command);
+int Button_read(char *fileName);
 
 #endif

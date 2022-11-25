@@ -9,7 +9,7 @@ void *threadNFC(void *arg)
     NFC_init(descPtr);
     while (1)
     {
-        
+
         if ((tagNum = NFC_poll(descPtr)) != prevTagNum && tagNum != 0)
         {
             printf("Found tag #%d\n", tagNum);
@@ -23,14 +23,15 @@ void *threadNFC(void *arg)
 
 void *threadMotionSensor(void *arg)
 {
-    motionSensor_initiate();
-    printf("Calibrating motion sensor\n");
-    sleepForMs(10);
+    motionSensor_init(left);
+    motionSensor_init(right);
+    printf("Calibrating motion sensors\n");
+    sleepForMs(1000);
     printf("Finished calibrating motion sensor\n");
     int motion = 0, pirState = 0;
     while (1)
     {
-        motion = motionSensor_isThereMotion();
+        motion = motionSensor_isThereMotion(left);
         if (motion == 1)
         {
             if (pirState == 0)
