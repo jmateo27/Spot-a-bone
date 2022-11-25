@@ -3,7 +3,6 @@
 #include <pthread.h>
 #include "nfcReader.h"
 #include "motionSensor.h"
-#include "socketIO.h"
 #include <time.h>
 
 void *threadNFC(void *arg);

@@ -6,8 +6,7 @@ void *threadNFC(void *arg)
 {
     NFC_descriptor *descPtr = (NFC_descriptor *)arg;
     int tagNum = 0, prevTagNum = 0;
-    NFC_initialize(descPtr);
-    char str[2];
+    NFC_init(descPtr);
     while (1)
     {
         
@@ -17,8 +16,6 @@ void *threadNFC(void *arg)
             if (tagNum != 0)
                 prevTagNum = tagNum;
             NFC_queueUp(tagNum);
-            sprintf(str, "%d\n", tagNum);
-            Socket_send()
         }
     }
     return NULL;
