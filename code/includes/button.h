@@ -14,6 +14,6 @@ static const int MAX_LENGTH = 1024;
 void Button_init();
 
 // Will return the integer form of the reading from fileName
-int Button_read(char *fileName);
+int Button_read();
 
 #endif

@@ -23,15 +23,15 @@ void *threadNFC(void *arg)
 
 void *threadMotionSensor(void *arg)
 {
-    motionSensor_init(left);
-    motionSensor_init(right);
+    MotionSensor_init(left);
+    MotionSensor_init(right);
     printf("Calibrating motion sensors\n");
     sleepForMs(1000);
     printf("Finished calibrating motion sensor\n");
     int motion = 0, pirState = 0;
     while (1)
     {
-        motion = motionSensor_isThereMotion(left);
+        motion = MotionSensor_isThereMotion(left);
         if (motion == 1)
         {
             if (pirState == 0)
