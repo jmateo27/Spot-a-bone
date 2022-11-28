@@ -20,8 +20,4 @@ void MotionSensor_init(Side side);
 
 int MotionSensor_isThereMotion(Side side);
 
-void MotionSensor_writeToFile(char *fileName, char *toWrite);
-
-void MotionSensor_runCommand(char *command);
-
 #endif
