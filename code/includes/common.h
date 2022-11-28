@@ -2,6 +2,7 @@
 #define COMMON_H_
 
 #include <stdio.h>
+#include <stdlib.h>
 
 void writeToFile(char *fileName, char *toWrite);
 
