@@ -5,24 +5,20 @@ typedef struct
     char *value;
     char *activeLow;
     char *direction;
-    char *config;
 } Paths;
 
 Paths MotionSensorPath[numSides] = {
     {"/sys/class/gpio/gpio66/value",
      "/sys/class/gpio/gpio66/active_low",
-     "/sys/class/gpio/gpio66/direction",
-     "config-pin P8.7 gpio"},
+     "/sys/class/gpio/gpio66/direction"},
 
     {"/sys/class/gpio/gpio67/value",
      "/sys/class/gpio/gpio67/active_low",
-     "/sys/class/gpio/gpio67/direction",
-     "config-pin P8.8 gpio"}};
+     "/sys/class/gpio/gpio67/direction"}};
 
 void MotionSensor_init(Side side)
 {
     Paths p = MotionSensorPath[side];
-    runCommand(p.config);
     writeToFile(p.direction, "in");
     writeToFile(p.activeLow, "0");
 }

@@ -11,9 +11,6 @@ char *queueFileName = "/mnt/remote/myApps/spotabone/NFC.txt";
 
 void NFC_init(NFC_descriptor *desc)
 {
-	runCommand("config-pin P9_18 i2c");
-	runCommand("config-pin P9_17 i2c");
-
 	// Initialize libnfc and set the nfc_context
 	nfc_init(&(desc->cont));
 	if (desc->cont == NULL)

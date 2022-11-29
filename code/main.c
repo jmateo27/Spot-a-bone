@@ -2,6 +2,13 @@
 #include "includes/myThreads.h"
 #include "includes/button.h"
 
+
+/*
+"config-pin P8_7 gpio"   // left motion sensor
+"config-pin P8_8 gpio"   // right motion sensor
+"config-pin P9_18 i2c"   // for the nfc..
+"config-pin P9_17 i2c"   // reader
+*/
 int main()
 {
     pthread_t nfc_t;
