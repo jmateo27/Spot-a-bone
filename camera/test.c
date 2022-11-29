@@ -1,4 +1,8 @@
-#include "capture.h"
+// #include "capture.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
 
 void sleepForMs(long long delayInMs)
 {
