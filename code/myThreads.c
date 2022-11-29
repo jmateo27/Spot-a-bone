@@ -24,7 +24,7 @@ void *threadNFC(void *arg)
 void *threadMotionSensor(void *arg)
 {
     MotionSensor_init(left);
-    MotionSensor_init(right);
+    // MotionSensor_init(right);
     printf("Calibrating motion sensors\n");
     sleepForMs(1000);
     printf("Finished calibrating motion sensor\n");
