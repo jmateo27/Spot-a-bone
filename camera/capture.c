@@ -1,33 +1,4 @@
-﻿/*
- *  V4L2 video capture example, modified by Derek Molloy for the Logitech C920 camera
- *  Modifications, added the -F mode for H264 capture and associated help detail
- *  www.derekmolloy.ie
- *
- *  V4L2 video capture example
- *
- *  This program can be used and distributed without restrictions.
- *
- *      This program is provided with the V4L2 API
- * see http://linuxtv.org/docs.php for more information
- */
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <assert.h>
-
-#include <getopt.h>             /* getopt_long() */
-
-#include <fcntl.h>              /* low-level i/o */
-#include <unistd.h>
-#include <errno.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <sys/time.h>
-#include <sys/mman.h>
-#include <sys/ioctl.h>
-
-#include <linux/videodev2.h>
+﻿#include "capture.h"
 
 #define CLEAR(x) memset(&(x), 0, sizeof(x))
 
