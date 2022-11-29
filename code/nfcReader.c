@@ -96,11 +96,10 @@ int NFC_findOutWhichTag(const uint8_t *pbtData, const size_t szBytes)
 void NFC_queueUp(int tagNum)
 {
 	FILE *pFile;
-	while ((pFile = fopen(queueFileName, "ab")) == NULL)
-		; // Wait if cannot open... (somewhat like a mutex)
+	while ((pFile = fopen(queueFileName, "ab")) == NULL); // Wait if cannot open... (somewhat like a mutex)
 
 	char toWrite[maxTagTens];
-	sprintf(toWrite, "%d\n", tagNum);
+	sprintf(toWrite, "s%d\n", tagNum);
 	fprintf(pFile, toWrite);
 
 	fclose(pFile);
