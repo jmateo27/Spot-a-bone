@@ -3,6 +3,7 @@ from os import listdir
 
 import string
 import time
+import datetime
 
 import threading
 
@@ -19,36 +20,22 @@ class myThreads:
         # Initialize image encodings
         self.photos_dir = 'stock'
         self.sample_dir = 'samples'
-            # change later for the actual program
-        self.photos = []
-        self.names = []
-        self.imgs = []
-        self.rgb_imgs = []
         self.img_mapping = []
+
+        print("Starting to initialize face recognition")
+        start_time = datetime.datetime.now()
 
         for p in os.listdir(self.photos_dir):
             if (p.endswith('.jpg')):
-                self.photos.append(p)
-                self.names.append(p.replace('.jpg', ''))
-
-        photo_threads = []
-        for ph in self.photos:
-            thr = threading.Thread(target = self.img_encoding_thread, 
-                                   args = (ph),
-                                   kwargs = {"img_map": img_mapping})
-            photo_threads.append(thr)
-
-        for thr in photo_threads:
-            thr.join()
+                img = cv2.imread(self.photos_dir + '/' + p)
+                rgb_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+                img_encoding = face_recognition.face_encodings(rgb_img)[0]
+                self.img_mapping.append( (img_encoding, p.replace('.jpg', '')) )
         
-        print("starting threads")
-        self.start_threads() # starts splitting the program into respective threads
-
-    def img_encoding_thread(self, photo, img_map = None):
-        img = cv2.imread(self.photos_dir + '/' + photo)
-        rgb_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-        img_encoding = face_recognition.face_encodings(rgb_img)[0]
-        img_map.append((img_encoding, photo.replace('.jpg', '')))
+        total_time = datetime.datetime.now() - start_time
+        print(total_time.total_seconds() , "seconds to complete initialization")
+        
+        self.start_threads()
 
     def start_threads(self):
         wait_for_command_thread = threading.Thread(target = self.wait_for_command)
@@ -57,6 +44,7 @@ class myThreads:
         analyze_photo_thread.start()
 
     def wait_for_command(self):
+        print("Ready for a command")
         while(1):
             if (self.isStart):
                 time.sleep(0.25)
@@ -79,6 +67,8 @@ class myThreads:
                 continue
             # start analyzing what is in the samples folder
             print("Starting to analyze...")
+            start_time = datetime.datetime.now()
+
             for p in os.listdir(self.sample_dir):
                 if (p.endswith('.jpg')):
                     samples.append(p)
@@ -103,18 +93,18 @@ class myThreads:
             if (len(names) == 0):
                 print("No matches")
 
-            print("printing name now")
-            # now put name
+            total_time = datetime.datetime.now() - start_time
+            print(total_time.total_seconds(), "seconds to analyze photo")
             f = open(self.namefile, "w")
             f.write(names[0] + '\n')
             f.close()
             
             self.isStart = False
+            print("Ready for a command")
             # should delete the photo from the samples folder, do later
 
     def distinguish_face(self, imgSample_encoding, face, name, my_list = None):
         result = face_recognition.compare_faces([imgSample_encoding], face)
-        print("done analyzing one")
         if (result == [True]):
             my_list.append(name)
         return
