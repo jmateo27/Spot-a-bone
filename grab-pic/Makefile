@@ -10,8 +10,8 @@ test: test.o
 test.o:
 	$(CC_C) $(CFLAGS) -c test.c
 
-# capture.o:
-# 	$(CC_C) $(CFLAGS) -c capture.c
+grabber.o:
+	$(CC_C) $(CFLAGS) -c grabber.c
 
 clean:
 	rm -rf test *.o *~
