@@ -26,8 +26,8 @@
 #include <libv4l2.h>
 
 void capture_init();
-static void xioctl(int fh, int request, void *arg);
-void camera_capture();
+void xioctl(int fh, int request, void *arg);
+int camera_capture();
 void capture_end();
 
 #endif
