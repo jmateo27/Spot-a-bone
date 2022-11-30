@@ -1,5 +1,6 @@
 #include "includes/myThreads.h"
 #include "includes/button.h"
+#include "includes/camera.h"
 
 #define oneMin 1
 
