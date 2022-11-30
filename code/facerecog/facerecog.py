@@ -14,8 +14,8 @@ import face_recognition
 class myThreads:
     def __init__(self):
         self.isStart = False
-        self.commandfile = "analyzeFace.txt"
-        self.namefile = "name.txt"
+        self.commandfile = "/mnt/remote/myApps/spotabone/analyzeFace.txt"
+        self.namefile = "/mnt/remote/myApps/spotabone/name.txt"
 
         # Initialize image encodings
         self.photos_dir = 'stock'
