@@ -1,22 +1,6 @@
 // #include "capture.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
-
-
-void sleepForMs(long long delayInMs)
-{
-	const long long NS_PER_MS = 1000 * 1000;
-	const long long NS_PER_SECOND = 1000000000;
-
-	long long delayNs = delayInMs * NS_PER_MS;
-	int seconds = delayNs / NS_PER_SECOND;
-	int nanoseconds = delayNs % NS_PER_SECOND;
-	
-	struct timespec reqDelay = {seconds, nanoseconds};
-	nanosleep(&reqDelay, (struct timespec *) NULL);
-}
-
 
 void NFC_runCommand(char *command)
 {
@@ -41,9 +25,14 @@ void NFC_runCommand(char *command)
 	}
 }
 
+/*
+sudo apt-get install libv4l-dev
+sudo apt-get install v4l-utils
+sudo apt-get install ffmpeg
+*/
+
 int main(){
     NFC_runCommand("./capture -F -c 300 -o > output.raw");
-    sleepForMs(30000);
     NFC_runCommand("ffmpeg -f mjpeg -i output.raw -vcodec copy output.mp4");
     return 0;
 }
