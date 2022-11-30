@@ -146,8 +146,8 @@ int camera_capture()
         fclose(fout);
 
         xioctl(fd, VIDIOC_QBUF, &buf);
-        return 0;
     }
+    return 0;
 }
 
 void capture_end()
