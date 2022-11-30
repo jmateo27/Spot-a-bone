@@ -100,7 +100,7 @@ static void xioctl(int fh, int request, void *arg)
     }
 }
 
-void camera_capture()
+int camera_capture()
 {
     xioctl(fd, VIDIOC_STREAMON, &type);
     struct timeval tv;
@@ -146,6 +146,7 @@ void camera_capture()
         fclose(fout);
 
         xioctl(fd, VIDIOC_QBUF, &buf);
+        return 0;
     }
 }
 
