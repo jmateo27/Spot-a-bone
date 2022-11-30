@@ -13,6 +13,7 @@ int main()
 {
     pthread_t nfc_t;
     pthread_t motionSensor_t;
+    pthread_t camera_t;
     NFC_descriptor nfc_desc;
     Button_init();
 
@@ -28,9 +29,16 @@ int main()
         return 1;
     }
 
-    while (!Button_read(BUTTON_pathValue));
+    if (pthread_create(&camera_t, NULL, &threadCamera, NULL) < 0)
+    {
+        perror("Could not create camera thread\n");
+        return 1;
+    }
+
+    // while (!Button_read(BUTTON_pathValue));
     pthread_cancel(nfc_t);
     pthread_cancel(motionSensor_t);
+    pthread_cancel(camera_t);
     NFC_cleanup(&nfc_desc);
     printf("Ending... Goodbye!\n");
     return 0;

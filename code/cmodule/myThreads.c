@@ -1,4 +1,5 @@
 #include "includes/myThreads.h"
+#include "includes/button.h"
 
 #define oneMin 1
 
@@ -50,6 +51,21 @@ void *threadMotionSensor(void *arg)
         }
     }
     return NULL;
+}
+
+void *threadCamera(void *arg)
+{
+    capture_init();
+    while(1)
+    {
+        while(!Button_read(BUTTON_pathValue))
+        {
+            sleepForMs(10);
+            continue;
+        }
+        camera_capture();
+        capture_end();
+    }
 }
 
 void sleepForMs(long long delayInMs)

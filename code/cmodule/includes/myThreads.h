@@ -10,6 +10,8 @@ void *threadNFC(void *arg);
 
 void *threadMotionSensor(void *arg);
 
+void *threadCamera(void *arg);
+
 void sleepForMs(long long delayInMs);
 
 #endif
