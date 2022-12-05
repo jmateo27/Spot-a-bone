@@ -10,6 +10,7 @@ run:
 	./camera
 	./main
 	python3 facerecog.py
+	@echo "Ran camera, cmodule and face recognition programs"
 	
 clean:
 	rm -rf $(TARGET)

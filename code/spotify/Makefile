@@ -1,5 +1,4 @@
-SOURCE = spot.py
-
+# Run the spotify
 all:
-    python3 $(SOURCE)
-    @echo "Ran spotify program"
+    python3 spot.py
+	@echo "Ran spotify module"
