@@ -55,7 +55,7 @@ class nfc_pipe:
                     algo = f.readline()
             finally:
                 f.close()
-            open(self.readNFC, "w").close()
+            open(self.nfctags, "w").close()
             while(not self.read_tags_mutex):
                 time.sleep(delay)
 
