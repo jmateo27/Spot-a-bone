@@ -64,7 +64,7 @@ int main(int argc, char **argv)
 	int r, fd = -1;
 	unsigned int i, n_buffers;
 	char *dev_name = "/dev/video0";
-	char out_name[256];
+	char out_name[256], new_name[256];
 	FILE *fout;
 	struct buffer *buffers;
 
@@ -159,7 +159,8 @@ int main(int argc, char **argv)
 			buf.memory = V4L2_MEMORY_MMAP;
 			xioctl(fd, VIDIOC_DQBUF, &buf);
 
-			sprintf(out_name, "/mnt/remote/myApps/spotabone/photos/grabber%03d.ppm", i);
+			sprintf(out_name, "grabber%03d.ppm", i);
+			sprintf(new_name, "/mnt/remote/myApps/spotabone/photos/grabber%03d.ppm", i);
 			fout = fopen(out_name, "w");
 			if (!fout)
 			{
@@ -172,6 +173,8 @@ int main(int argc, char **argv)
 			fclose(fout);
 
 			xioctl(fd, VIDIOC_QBUF, &buf);
+			// move the file to the new directory;
+			rename(out_name, new_name);
 		}
 
 		type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
