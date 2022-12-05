@@ -1,5 +1,5 @@
 # Run the spotify
-all:
+all: clean
 	python3 spot.py
 	@echo "Ran spotify module"
 
