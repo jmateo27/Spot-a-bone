@@ -129,12 +129,12 @@ int main(int argc, char **argv)
 		xioctl(fd, VIDIOC_QBUF, &buf);
 	}
 	type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
-	(xioctl(fd, VIDIOC_STREAMON, &type));
 
 	while (1)
 	{
 		while (!isCommand());
-
+		xioctl(fd, VIDIOC_STREAMON, &type);
+		
 		for (i = 0; i < 5; i++)
 		{
 			do
