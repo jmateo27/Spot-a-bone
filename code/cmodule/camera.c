@@ -187,7 +187,7 @@ int main(int argc, char **argv)
 	return 0;
 }
 
-typedef int FD
+typedef int FD;
 
 bool isCommand()
 {
@@ -209,8 +209,11 @@ bool isCommand()
 	// Close
 	// fclose(pFile);
 	fclose(fopen(commandFile, "w")); // Clear the file
-	if (count > 0)
+	if (count > 0){
+		printf("there is a command");
 		return 1;
-	else
+	}
+	else{
 		return 0;
+	}
 }
