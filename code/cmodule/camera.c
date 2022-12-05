@@ -216,7 +216,6 @@ typedef int FD;
 
 bool isCommand()
 {
-	printf("checking...\n");
 	FD pFile = open(commandFile, O_RDWR);
 	if (!pFile)
 	{
@@ -238,7 +237,6 @@ bool isCommand()
 	fclose(fopen(commandFile, "w")); // Clear the file
 	if (count > 0)
 	{
-		printf("there is a command");
 		return 1;
 	}
 	else
