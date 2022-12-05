@@ -191,6 +191,7 @@ typedef int FD;
 
 bool isCommand()
 {
+	printf("checking...\n");
 	FD pFile = open(commandFile, O_RDWR );
 	if (!pFile){
 		printf("ERROR: Unable to open file (%s) for read\n", commandFile);
