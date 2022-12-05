@@ -22,7 +22,7 @@
 #include <sys/mman.h>
 #include <linux/videodev2.h>
 #include <libv4l2.h>
-
+#include <stdbool.h>
 #define CLEAR(x) memset(&(x), 0, sizeof(x))
 
 // char *photosDir = "/mnt/remote/myApps/spotabone/photos/";
@@ -129,8 +129,7 @@ int main(int argc, char **argv)
 		xioctl(fd, VIDIOC_QBUF, &buf);
 	}
 	type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
-	while
-		xioctl(fd, VIDIOC_STREAMON, &type);
+	(xioctl(fd, VIDIOC_STREAMON, &type));
 
 	while (1)
 	{
