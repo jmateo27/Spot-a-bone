@@ -27,10 +27,12 @@
 
 #define CLEAR(x) memset(&(x), 0, sizeof(x))
 
-char *commandFile = "/mnt/remote/myApps/spotabone/takePhotos.txt";
+char *commandFile = "/mnt/remote/myApps/spotabone/comms/takePhotos.txt";
+char *analyzeFile = "/mnt/remote/myApps/spotabone/comms/camera.txt";
 
 // PROTOTYPES
 bool isCommand();
+void writeReadyToAnalyzePhotos();
 
 int msleep(long msec)
 {
@@ -206,7 +208,8 @@ int main(int argc, char **argv)
 		for (i = 0; i < n_buffers; ++i)
 			v4l2_munmap(buffers[i].start, buffers[i].length);
 		v4l2_close(fd);
-		
+		// Now tell the main.c that there are photos to be analyzed
+		writeReadyToAnalyzePhotos();
 	}
 
 	return 0;
@@ -222,12 +225,7 @@ bool isCommand()
 		printf("ERROR: Unable to open file (%s) for read\n", commandFile);
 		exit(-1);
 	}
-	// FILE *pFile = fopen(commandFile, "r");
-	// if (pFile == NULL)
-	// {
-	// 	printf("ERROR: Unable to open file (%s) for read\n", commandFile);
-	// 	exit(-1);
-	// }
+
 	// Read string (line)
 	char result[256];
 	ssize_t count;
@@ -243,4 +241,16 @@ bool isCommand()
 	{
 		return 0;
 	}
+}
+
+void writeReadyToAnalyzePhotos(){
+	FILE *pFile = fopen(analyzeFile, "w");
+    if (pFile == NULL) {
+        printf("ERROR: Unable to open export file.\n");
+        exit(1);
+    }
+
+    fprintf(pFile, "1");
+
+    fclose(pFile);
 }

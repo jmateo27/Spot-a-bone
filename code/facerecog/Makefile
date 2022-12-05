@@ -7,4 +7,4 @@ all: clean
 	$(CC_C) $(SOURCE) -lv4l2 -o $(TARGET)
 	
 clean:
-	rm $(TARGET)
+	rm -rf $(TARGET)

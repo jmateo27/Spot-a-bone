@@ -4,16 +4,19 @@
 
 
 /*
-"config-pin P8_7 gpio"   // left motion sensor
-"config-pin P8_8 gpio"   // right motion sensor
-"config-pin P9_18 i2c"   // for the nfc..
-"config-pin P9_17 i2c"   // reader
+cd /sys/class/gpio
+sudo echo 48 > export
+sudo echo 51 > export
+config-pin P9_15 gpio
+config-pin P9_16 gpio
+config-pin P9_17 i2c
+config-pin P9_18 i2c
 */
 
 int main()
 {
     pthread_t nfc_t;
-    pthread_t motionSensor_t;
+    // pthread_t motionSensor_t;
     NFC_descriptor nfc_desc;
     Button_init();
 
@@ -23,15 +26,16 @@ int main()
         return 1;
     }
 
-    if (pthread_create(&motionSensor_t, NULL, &threadMotionSensor, NULL) < 0)
-    {
-        perror("Could not create motion sensor thread\n");
-        return 1;
-    }
+    // if (pthread_create(&motionSensor_t, NULL, &threadMotionSensor, NULL) < 0)
+    // {
+    //     perror("Could not create motion sensor thread\n");
+    //     return 1;
+    // }
 
-    // while (!Button_read(BUTTON_pathValue));
+    while (!Button_read(BUTTON_pathValue));
+
     pthread_cancel(nfc_t);
-    pthread_cancel(motionSensor_t);
+    // pthread_cancel(motionSensor_t);
     NFC_cleanup(&nfc_desc);
     printf("Ending... Goodbye!\n");
     return 0;

@@ -14,7 +14,7 @@ import face_recognition
 class myThreads:
     def __init__(self):
         self.isStart = False
-        self.commandfile = "analyzeFace.txt"
+        self.commandfile = "camera.txt"
         self.namefile = "name.txt"
 
         # Initialize image encodings

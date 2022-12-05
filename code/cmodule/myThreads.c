@@ -9,7 +9,6 @@ void *threadNFC(void *arg)
     NFC_init(descPtr);
     while (1)
     {
-
         if ((tagNum = NFC_poll(descPtr)) != prevTagNum && tagNum != 0)
         {
             printf("Found tag #%d\n", tagNum);
