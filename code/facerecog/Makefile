@@ -9,7 +9,7 @@ all: clean
 run:
 	./camera
 	./main
-	python3 facerecog.py > facerecog
+	python3 facerecog.py
 	
 clean:
 	rm -rf $(TARGET)
