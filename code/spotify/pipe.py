@@ -13,7 +13,7 @@ class nfc_pipe:
 
         print ("Creating pipe and thread...")
         self.p = pipes.Template()
-        self.nfctags = "spotabone/comms/NFC.txt"
+        self.nfctags = "~/cmpt433/public/myApps/spotabone/comms/NFC.txt"
         
         self.songQueue = list()
         self.playlistQueue = list()
@@ -52,7 +52,7 @@ class nfc_pipe:
                     algo = f.readline()
             finally:
                 f.close()
-            open("spotabone/comms/NFC.txt", "w").close()
+            open("~/cmpt433/public/myApps/spotabone/comms/NFC.txt", "w").close()
             while(not self.read_tags_mutex):
                 time.sleep(delay)
 
