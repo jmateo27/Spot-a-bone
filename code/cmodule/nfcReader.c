@@ -7,7 +7,7 @@ tagWithUID tagDatabase[] = {
 int numTags = 2;
 int maxTagTens = 2;
 
-char *queueFileName = "/mnt/remote/myApps/spotabone/NFC.txt";
+char *queueFileName = "/mnt/remote/myApps/spotabone/comms/NFC.txt";
 
 void NFC_init(NFC_descriptor *desc)
 {
