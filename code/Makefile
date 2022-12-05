@@ -14,6 +14,7 @@ camera-copy:
 	cp -r $(CAMERA) $(OUTDIR)
 	mkdir -p $(OUTDIR)/photos
 	cp -r $(FACERECOG_DIR)/* $(OUTDIR)
+	@echo "Copied camera"
 
 remarks:
 	@echo ""
