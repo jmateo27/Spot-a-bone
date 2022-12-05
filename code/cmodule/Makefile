@@ -7,9 +7,8 @@ TARGET = main
 TESTING = testing
 TEST_SOURCES = $(TESTING)/nfcTest.c $(TESTING)/nfc-utils.c
 
-all: clean main
-
-main: cmodule createTextFiles
+all: clean cmodule createTextFiles
+	@echo "Made cmodule"
 
 cmodule:
 	mkdir -p $(OUTDIR)
