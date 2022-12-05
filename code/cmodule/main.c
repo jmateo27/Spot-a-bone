@@ -9,6 +9,7 @@
 "config-pin P9_18 i2c"   // for the nfc..
 "config-pin P9_17 i2c"   // reader
 */
+
 int main()
 {
     pthread_t nfc_t;
