@@ -10,7 +10,6 @@ class control:
         token = self.db.get_token()
         self.sp = spotipy.Spotify(auth=token)
         self.username = username
-        #self.current_user = self.get_current_user()
         self.current_playback = self.get_current_playback()
         self.deviceID = str()
 
@@ -28,7 +27,6 @@ class control:
         token = self.db.get_token()
         self.username=username
         self.sp = spotipy.Spotify(auth=token)
-        #self.current_user = self.get_current_user()
         self.current_playback = self.get_current_playback()
         self.deviceID = str()
 

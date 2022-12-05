@@ -21,4 +21,6 @@ remarks:
 	@echo "You must do the following to run everything:"
 	@echo "(bbg)$$ cd /mnt/remote/myApps/spotabone/"
 	@echo "(bbg)$$ make"
-	@echo "(bbg)$$ make run"
+	@echo "(bbg)$$ ./main"
+	@echo "(bbg)$$ ./camera"
+	@echo "(bbg)$$ python3 facerecog.py"
