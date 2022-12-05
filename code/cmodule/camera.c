@@ -187,20 +187,27 @@ int main(int argc, char **argv)
 	return 0;
 }
 
+typedef int FD
+
 bool isCommand()
 {
-	FILE *pFile = fopen(commandFile, "r");
-	if (pFile == NULL)
-	{
+	FD pFile = open(commandFile, O_RDWR );
+	if (!pFile){
 		printf("ERROR: Unable to open file (%s) for read\n", commandFile);
 		exit(-1);
 	}
+	// FILE *pFile = fopen(commandFile, "r");
+	// if (pFile == NULL)
+	// {
+	// 	printf("ERROR: Unable to open file (%s) for read\n", commandFile);
+	// 	exit(-1);
+	// }
 	// Read string (line)
 	char result[256];
-	int count;
+	ssize_t count;
 	count = read(pFile, result, 16);
 	// Close
-	fclose(pFile);
+	// fclose(pFile);
 	fclose(fopen(commandFile, "w")); // Clear the file
 	if (count > 0)
 		return 1;
