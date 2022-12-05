@@ -23,6 +23,8 @@
 #include <linux/videodev2.h>
 #include <libv4l2.h>
 #include <stdbool.h>
+#include <time.h>
+
 #define CLEAR(x) memset(&(x), 0, sizeof(x))
 
 // char *photosDir = "/mnt/remote/myApps/spotabone/photos/";
@@ -30,6 +32,27 @@ char *commandFile = "/mnt/remote/myApps/spotabone/camera.txt";
 
 // PROTOTYPES
 bool isCommand();
+
+int msleep(long msec)
+{
+    struct timespec ts;
+    int res;
+
+    if (msec < 0)
+    {
+        errno = EINVAL;
+        return -1;
+    }
+
+    ts.tv_sec = msec / 1000;
+    ts.tv_nsec = (msec % 1000) * 1000000;
+
+    do {
+        res = nanosleep(&ts, &ts);
+    } while (res && errno == EINTR);
+
+    return res;
+}
 
 struct buffer
 {
@@ -58,8 +81,9 @@ int main(int argc, char **argv)
 
 	while (1)
 	{
-		while (!isCommand())
-			;
+		while (!isCommand()){
+			msleep(50);
+		};
 		struct v4l2_format fmt;
 		struct v4l2_buffer buf;
 		struct v4l2_requestbuffers req;
