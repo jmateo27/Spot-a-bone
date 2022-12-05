@@ -27,8 +27,7 @@
 
 #define CLEAR(x) memset(&(x), 0, sizeof(x))
 
-// char *photosDir = "/mnt/remote/myApps/spotabone/photos/";
-char *commandFile = "/mnt/remote/myApps/spotabone/camera.txt";
+char *commandFile = "/mnt/remote/myApps/spotabone/takePhotos.txt";
 
 // PROTOTYPES
 bool isCommand();
@@ -207,6 +206,7 @@ int main(int argc, char **argv)
 		for (i = 0; i < n_buffers; ++i)
 			v4l2_munmap(buffers[i].start, buffers[i].length);
 		v4l2_close(fd);
+		
 	}
 
 	return 0;
