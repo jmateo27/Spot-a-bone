@@ -1,5 +1,5 @@
 OUTDIR = $(HOME)/cmpt433/public/myApps/spotabone
-FACERECOG_DIR = ../facerecog
+FACERECOG_DIR = facerecog
 CAMERA = $(FACERECOG_DIR)/camera.c
 
 all: nested-cmodule camera-copy nested-spotify remarks
