@@ -1,6 +1,7 @@
 import pipes
 import time
 import threading
+import os
 # possible improvement is to get all the keys from the database at the beginning
 # and store them in dictionaries in here just so if we add more playlists etc, its fine
 
@@ -13,7 +14,9 @@ class nfc_pipe:
 
         print ("Creating pipe and thread...")
         self.p = pipes.Template()
-        self.nfctags = "~/cmpt433/public/myApps/spotabone/comms/NFC.txt"
+        ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+        
+        self.nfctags = os.path.join(ROOT_DIR, "/cmpt433/public/myApps/spotabone/comms/NFC.txt")
         
         self.songQueue = list()
         self.playlistQueue = list()
@@ -52,7 +55,7 @@ class nfc_pipe:
                     algo = f.readline()
             finally:
                 f.close()
-            open("~/cmpt433/public/myApps/spotabone/comms/NFC.txt", "w").close()
+            open(self.readNFC, "w").close()
             while(not self.read_tags_mutex):
                 time.sleep(delay)
 
