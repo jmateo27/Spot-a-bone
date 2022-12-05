@@ -12,6 +12,7 @@ all: clean main
 main:
 	mkdir -p $(OUTDIR)
 	$(CC_C) $(CFLAGS) $(SOURCES) -o $(OUTDIR)/$(TARGET) -lpthread -lnfc
+	
 
 clean:
 	rm -rf nfcReader *.o *~
