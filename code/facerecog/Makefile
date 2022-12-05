@@ -5,6 +5,11 @@ TARGET = camera
 
 all: clean
 	$(CC_C) $(SOURCE) -lv4l2 -o $(TARGET)
+
+run:
+	./camera
+	./main
+	python3 facerecog.py > facerecog
 	
 clean:
 	rm -rf $(TARGET)

@@ -1,0 +1,23 @@
+OUTDIR = $(HOME)/cmpt433/public/myApps/spotabone
+FACERECOG_DIR = ../facerecog
+CAMERA = $(FACERECOG_DIR)/camera.c
+
+all: nested-cmodule
+
+nested-cmodule:
+	make --directory=cmodule
+
+nested-spotify:
+	make --directory=spotify
+
+camera-copy:
+	cp -r $(CAMERA) $(OUTDIR)
+	mkdir -p $(OUTDIR)/photos
+	cp -r $(FACERECOG_DIR)/* $(OUTDIR)
+
+remarks:
+	@echo ""
+	@echo "You must do the following to run everything:"
+	@echo "(bbg)$$ cd /mnt/remote/myApps/spotabone/"
+	@echo "(bbg)$$ make"
+	@echo "(bbg)$$ make run"
