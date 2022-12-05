@@ -2,7 +2,7 @@ OUTDIR = $(HOME)/cmpt433/public/myApps/spotabone
 FACERECOG_DIR = ../facerecog
 CAMERA = $(FACERECOG_DIR)/camera.c
 
-all: nested-cmodule
+all: nested-cmodule camera-copy nested-spotify remarks
 
 nested-cmodule:
 	make --directory=cmodule
