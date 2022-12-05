@@ -196,12 +196,13 @@ bool isCommand()
 		exit(-1);
 	}
 	// Read string (line)
-	int result, count;
-	count = fscanf(pFile, "%d", result);
+	char result[256];
+	int count;
+	count = read(pFile, result, 16);
 	// Close
 	fclose(pFile);
 	fclose(fopen(commandFile, "w")); // Clear the file
-	if (count != 0)
+	if (count > 0)
 		return 1;
 	else
 		return 0;
