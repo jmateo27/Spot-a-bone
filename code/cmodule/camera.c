@@ -25,7 +25,8 @@
 
 #define CLEAR(x) memset(&(x), 0, sizeof(x))
 
-char *photosDir = "/mnt/remote/myApps/spotabone/photos/";
+// char *photosDir = "/mnt/remote/myApps/spotabone/photos/";
+char *commandFile = "/mnt/remote/myApps/spotabone/camera.txt";
 
 // PROTOTYPES
 bool isCommand();
@@ -134,7 +135,7 @@ int main(int argc, char **argv)
 	while (1)
 	{
 		while (!isCommand());
-		
+
 		for (i = 0; i < 5; i++)
 		{
 			do
@@ -159,7 +160,7 @@ int main(int argc, char **argv)
 			buf.memory = V4L2_MEMORY_MMAP;
 			xioctl(fd, VIDIOC_DQBUF, &buf);
 
-			sprintf(out_name, "grabber%03d.ppm", i);
+			sprintf(out_name, "/mnt/remote/myApps/spotabone/photos/grabber%03d.ppm", i);
 			fout = fopen(out_name, "w");
 			if (!fout)
 			{
@@ -186,10 +187,10 @@ int main(int argc, char **argv)
 
 bool isCommand()
 {
-	FILE *pFile = fopen(photosDir, "r");
+	FILE *pFile = fopen(commandFile, "r");
 	if (pFile == NULL)
 	{
-		printf("ERROR: Unable to open file (%s) for read\n", photosDir);
+		printf("ERROR: Unable to open file (%s) for read\n", commandFile);
 		exit(-1);
 	}
 	// Read string (line)
@@ -197,7 +198,7 @@ bool isCommand()
 	count = fscanf(pFile, "%d", result);
 	// Close
 	fclose(pFile);
-	fclose(fopen(photosDir, "w")); // Clear the file
+	fclose(fopen(commandFile, "w")); // Clear the file
 	if (count != 0)
 		return 1;
 	else
