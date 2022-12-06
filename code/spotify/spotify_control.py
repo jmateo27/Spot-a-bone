@@ -168,7 +168,6 @@ class control:
 
     def setSongFile(self):
         with open(self.songFile, "a+") as f:
-            print("writing to song.txt")
             f.write(f"{self.sp.current_playback()['item']['name']} by {self.sp.current_playback()['item']['artists'][0]['name']}\n")
 
     def cleanup(self):
