@@ -21,8 +21,8 @@ class myThreads:
         self.namefile = username + "/cmpt433/public/myApps/spotabone/comms/name.txt"
 
         # Initialize image encodings
-        self.photos_dir = 'stock'
-        self.sample_dir = 'photos'
+        self.photos_dir = username + "/cmpt433/public/myApps/spotabone/stock"
+        self.photos_dir = username + "/cmpt433/public/myApps/spotabone/photos"
         self.img_mapping = []
 
         print("Starting to initialize face recognition")
