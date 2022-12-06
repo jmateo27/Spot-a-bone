@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <fcntl.h>
+#include <unistd.h>
 
 void Comm_queueUpSong(int tagNum);
 void Comm_commandCamera();
