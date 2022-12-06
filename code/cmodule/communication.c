@@ -1,5 +1,7 @@
 #include "includes/communication.h"
 
+int maxTagTens = 2;
+
 typedef int FD;
 
 char **commFiles = {
