@@ -34,7 +34,7 @@ void writeMessage(char *message);
 // Helper for clean up
 void clearDisplay();
 
-void scrollText(char *msg);
+void scrollText(char *msg, int messageLength);
 
 
 #endif
