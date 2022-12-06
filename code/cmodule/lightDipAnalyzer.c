@@ -5,7 +5,7 @@ static PHOTORES_record PHOTORES_allTimeRecord;
 static pthread_mutex_t recordMutex = PTHREAD_MUTEX_INITIALIZER;
 static PHOTORES_sampleResult res;
 static pthread_mutex_t resMutex = PTHREAD_MUTEX_INITIALIZER;
-
+static pthread_t lightLEFT, lightRIGHT, lightMIDDLE;
 
 void *readLeft(void *args){
     PHOTORES_record recordBuffer;
@@ -151,7 +151,6 @@ void *readMIDDLE(void *args){
     return NULL;
 }
 void startMotionSensorThreads(){
-    pthread_t lightLEFT, lightRIGHT, lightMIDDLE;
     res.numberOfDips = 0;
     res.numberOfSamples = 0;
 
