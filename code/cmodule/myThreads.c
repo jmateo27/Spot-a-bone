@@ -38,7 +38,7 @@ void *threadLCDScreen(void *args)
     char msg[50];
     char newMsg[50];
     int messageLength = 0;
-
+    FILE * ptr;
     newMsg[0] = '\0';
     LcdDisplay_init();
     while (1)
@@ -87,7 +87,8 @@ void *threadLCDScreen(void *args)
         }
         newMsg[0] = '\0';
         for (int i = 0; i < 2; i++)
-            scrollText();
+            scrollText(msg,messageLength);
+        
         for (int i = 0; msg[i] != '\0'; i++)
         {
             msg[i] = '\0';
