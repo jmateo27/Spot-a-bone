@@ -32,7 +32,7 @@ int main()
     //     return 1;
     // }
 
-    while (!Button_read(BUTTON_pathValue));
+    while (!endButton_read());
 
     pthread_cancel(nfc_t);
     // pthread_cancel(motionSensor_t);

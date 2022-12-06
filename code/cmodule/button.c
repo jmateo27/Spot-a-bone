@@ -1,17 +1,17 @@
 #include "includes/button.h"
 #include <stdio.h>
 
-void Button_init()
+void endButton_init()
 {
     runCommand("config-pin p8.43 gpio"); // force the button's pin to be treated as GPIO
-    writeToFile(BUTTON_pathDirection, "in");
-    writeToFile(BUTTON_pathactiveLow, "1");
+    writeToFile(ENDBUTTON_pathDirection, "in");
+    writeToFile(ENDBUTTON_pathactiveLow, "1");
 }
 
 // Implementation partially inspired from assignment document (Brian Fraser)
-int Button_read()
+int endButton_read()
 {
-    char *fileName = BUTTON_pathValue;
+    char *fileName = ENDBUTTON_pathValue;
     FILE *pFile = fopen(fileName, "r");
     if (pFile == NULL)
     {

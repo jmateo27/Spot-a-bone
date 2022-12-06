@@ -4,16 +4,16 @@
 #include <stdlib.h>
 #include "common.h"
 
-// Paths of button characteristics that need to be set
-#define BUTTON_pathValue "/sys/class/gpio/gpio72/value"
-#define BUTTON_pathactiveLow "/sys/class/gpio/gpio72/active_low"
-#define BUTTON_pathDirection "/sys/class/gpio/gpio72/direction"
+// Paths of end button characteristics that need to be set
+#define ENDBUTTON_pathValue "/sys/class/gpio/gpio72/value"
+#define ENDBUTTON_pathactiveLow "/sys/class/gpio/gpio72/active_low"
+#define ENDBUTTON_pathDirection "/sys/class/gpio/gpio72/direction"
 
 static const int MAX_LENGTH = 1024;
 
-void Button_init();
+void endButton_init();
 
 // Will return the integer form of the reading from fileName
-int Button_read();
+int endButton_read();
 
 #endif
