@@ -18,7 +18,7 @@ class myThreads:
         username = getpass.getuser()        
         username = "/home/"+username
         self.commandfile = username + "/cmpt433/public/myApps/spotabone/comms/camera.txt"
-        self.namefile = username + "/cmpt433/public/myApps/spotabone/comms/name.txt"
+        self.namefile = username + "/cmpt433/public/myApps/spotabone/comms/NFC.txt"
 
         # Initialize image encodings
         self.photos_dir = username + "/cmpt433/public/myApps/spotabone/stock"
