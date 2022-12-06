@@ -47,7 +47,9 @@ void *threadLCDScreen(void *args)
         while (!newMsg[0])
         {
             msleep(50);
-            while ((pFile = fopen(SONGS_DIR, "r")) == NULL); // Wait if cannot open... (somewhat like a mutex)
+            while ((pFile = fopen(SONGS_DIR, "r")) == NULL){
+                printf("im stuck");
+            }; // Wait if cannot open... (somewhat like a mutex)
             if (pFile == NULL)
             {
                 printf("null pointer...\n");
