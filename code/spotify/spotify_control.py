@@ -167,7 +167,7 @@ class control:
 
     def setSongFile(self):
         with open(self.songFile, "a+") as f:
-            f.write(f"{self.sp.current_playback()['item']['name']} by {self.sp.current_playback()['item']['artists'][0]['name']}")
+            f.write(f"{self.sp.current_playback()['item']['name']} by {self.sp.current_playback()['item']['artists'][0]['name']}\n")
 
     def cleanup(self):
         print("Closing Database...")
