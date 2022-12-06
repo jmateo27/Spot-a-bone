@@ -40,14 +40,14 @@ void *threadLCDScreen(void *args)
     int messageLength = 0;
 
     newMsg[0] = '\0';
-    FILE *ptr;
+    FILE *pFile;
     LcdDisplay_init();
     while (1)
     {
         while (!newMsg[0])
         {
-            delayFor(1, 0);
-            ptr = fopen(SONGS_DIR, "r");
+            msleep(50)
+            while ((pFile = fopen(SONGS_DIR, "r")) == NULL); // Wait if cannot open... (somewhat like a mutex)
             if (ptr == NULL)
             {
                 printf("null pointer...\n");
