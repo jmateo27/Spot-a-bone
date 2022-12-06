@@ -1,7 +1,6 @@
 #include "includes/lcd.h"
 
-static char *myMsg;
-// static int myMessageLength;
+
 
 void LcdDisplay_init()
 {
@@ -137,14 +136,6 @@ void clearDisplay()
 
 void scrollText(char *msg, int messageLength)
 {
-    for (int i = 0; myMsg[i] != '\0'; i++)
-    {
-        myMsg[i] = '\0';
-    }
-    for (int i = 0; i < messageLength; i++)
-    {
-        myMsg[i] = msg[i];
-    }
     int j = 0;
     int h;
     char scrollPadding[] = "                ";
@@ -158,7 +149,7 @@ void scrollText(char *msg, int messageLength)
             j = 0;
         for (int i = 0; i <= j; i++)
         {
-            scrollPadding[h - j] = myMsg[i];
+            scrollPadding[h - j] = msg[i];
             h++;
         }
         clearDisplay();
