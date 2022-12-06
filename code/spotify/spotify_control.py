@@ -42,13 +42,12 @@ class control:
             self.sp.start_playback(uris=uris)
         except:
             print("No active device!")
-            return;
+            return
         time.sleep(0.5)
         control.print_playback()
         self.deviceID = self.get_current_playback()['device']['id']
 
     def print_playback(self):
-        # self.setSongFile()
         print(f"Playing {self.sp.current_playback()['item']['name']} by {self.sp.current_playback()['item']['artists'][0]['name']} on {self.username} {self.sp.current_playback()['device']['name']}")
 
     def print_queued(self,song_name, song_artist):
@@ -74,7 +73,7 @@ class control:
             self.sp.user_playlist_tracks(playlist_id=playlistID)
         except:
             print("Current User doesn't have this playlist")
-            return;
+            return
         results = self.sp.user_playlist_tracks(playlist_id=playlistID)
         uris=list()
         for track in results['tracks']['items']:
@@ -86,7 +85,7 @@ class control:
                 self.sp.start_playback(uris=uris)
             except:
                 print("No active device!")
-                return;
+                return
             self.sp.shuffle(True)       
             print(f"Now Shuffling")
         self.deviceID = self.get_current_playback()['device']['id']
@@ -105,7 +104,7 @@ class control:
                     self.sp.start_playback(uris=uris)
                 except:
                     print("No active device!")
-                    return;
+                    return
                 self.sp.shuffle(True)
                 break
         if (len(uris)==0):
@@ -157,9 +156,11 @@ class control:
                 self.sp.start_playback(uris = [song_info[0]])
             except:
                 print("No active device!")
-                return;
+                return
             time.sleep(0.5)
+            print("I'm Here")
             self.print_playback()
+            self.setSongFile()
         else:
             self.sp.add_to_queue(song_info[1],song_info[3])
             time.sleep(0.5)
@@ -167,6 +168,7 @@ class control:
 
     def setSongFile(self):
         with open(self.songFile, "a+") as f:
+            print("writing to song.txt")
             f.write(f"{self.sp.current_playback()['item']['name']} by {self.sp.current_playback()['item']['artists'][0]['name']}\n")
 
     def cleanup(self):
