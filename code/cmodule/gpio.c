@@ -25,25 +25,32 @@ P9_18  --> D7
 
 
 /*
+config-pin P9_27 gpio
+config-pin P9_28 gpio
+config-pin P9_29 gpio
+config-pin P9_30 gpio
 config-pin P9_25 gpio
 config-pin P9_24 gpio
-config-pin P9_23 gpio
-config-pin P9_22 gpio
-config-pin P9_21 gpio
-config-pin P9_18 gpio
 */
 
-#define D4_DIRECTION "/sys/class/gpio/gpio49/direction"
-#define D4_VALUE "/sys/class/gpio/gpio49/value"
 
-#define D5_DIRECTION "/sys/class/gpio/gpio2/direction"
-#define D5_VALUE "/sys/class/gpio/gpio2/value"
+// #define D4_GPIO_NUMBER 115
+// #define D5_GPIO_NUMBER 113
+// #define D6_GPIO_NUMBER 111
+// #define D7_GPIO_NUMBER 112
+// #define RS_GPIO_NUMBER 117
+// #define E_GPIO_NUMBER  15
+#define D4_DIRECTION "/sys/class/gpio/gpio115/direction"
+#define D4_VALUE "/sys/class/gpio/gpio115/value"
 
-#define D6_DIRECTION "/sys/class/gpio/gpio3/direction"
-#define D6_VALUE "/sys/class/gpio/gpio3/value"
+#define D5_DIRECTION "/sys/class/gpio/gpio113/direction"
+#define D5_VALUE "/sys/class/gpio/gpio113/value"
 
-#define D7_DIRECTION "/sys/class/gpio/gpio4/direction"
-#define D7_VALUE "/sys/class/gpio/gpio4/value"
+#define D6_DIRECTION "/sys/class/gpio/gpio111/direction"
+#define D6_VALUE "/sys/class/gpio/gpio111/value"
+
+#define D7_DIRECTION "/sys/class/gpio/gpio112/direction"
+#define D7_VALUE "/sys/class/gpio/gpio112/value"
 
 #define RS_DIRECTION "/sys/class/gpio/gpio117/direction"
 #define RS_VALUE "/sys/class/gpio/gpio117/value"

@@ -14,4 +14,6 @@ void *threadNFC(void *arg);
 
 void *threadCameraButton(void *arg);
 
+void *threadLCDScreen(void *args);
+
 #endif

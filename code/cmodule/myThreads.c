@@ -32,3 +32,58 @@ void *threadCameraButton(void *arg){
     }
     return NULL;
 }
+
+void *threadLCDScreen(void *args)
+{
+    char newMsg[50];
+    newMsg[0] = '\0';
+    FILE *ptr;
+    LcdDisplay_init();
+    while (1)
+    {
+        while (!newMsg[0])
+        {
+            delayFor(1, 0);
+            ptr = fopen(SONGS_DIR, "r");
+            if (ptr == NULL)
+            {
+                exit(1);
+            }
+            fscanf(ptr, "%[^\n]s", newMsg);
+
+            fclose(ptr);
+        }
+
+        fclose(fopen(SONGS_DIR, "w"));
+
+        messageLength = 0;
+        for (int i = 0; newMsg[i] != '\0'; i++)
+        {
+            msg[i] = newMsg[i];
+            messageLength++;
+        }
+        newMsg[0] = '\0';
+        for (int i = 0; i < 2; i++)
+            scrollText();
+        for (int i = 0; msg[i] != '\0'; i++)
+        {
+            msg[i] = '\0';
+        }
+
+        clearDisplay();
+
+    }
+
+    char *buff;
+    size_t sizeAllocated = 0;
+    printf("\nPRESS RETURN TO EXIT \n");
+    fflush(stdout);
+    getline(&buff, &sizeAllocated, stdin);
+
+    if (*buff == '\n')
+    {
+        LcdDisplay_cleanUp();
+    }
+
+    return 0;
+}

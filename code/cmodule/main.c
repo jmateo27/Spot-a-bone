@@ -15,7 +15,7 @@ config-pin P9_18 i2c
 
 int main()
 {
-    pthread_t nfc_t, cameraButton_t;
+    pthread_t nfc_t, cameraButton_t, lcdScreen_t;
     // pthread_t motionSensor_t;
     NFC_descriptor nfc_desc;
     endButton_init();
@@ -30,6 +30,12 @@ int main()
     if (pthread_create(&cameraButton_t, NULL, &threadCameraButton, NULL) < 0)
     {
         perror("Could not create Camera button thread\n");
+        return 1;
+    }
+
+    if (pthread_create(&lcdScreen_t, NULL, &threadLCDScreen, NULL) < 0)
+    {
+        perror("Could not create LCD Screen thread\n");
         return 1;
     }
 

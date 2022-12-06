@@ -1,10 +1,10 @@
 #ifndef _GPIO_H_
 #define _GPIO_H_
 
-#define D4_GPIO_NUMBER 49
-#define D5_GPIO_NUMBER 2
-#define D6_GPIO_NUMBER 3
-#define D7_GPIO_NUMBER 4
+#define D4_GPIO_NUMBER 115
+#define D5_GPIO_NUMBER 113
+#define D6_GPIO_NUMBER 111
+#define D7_GPIO_NUMBER 112
 #define RS_GPIO_NUMBER 117
 #define E_GPIO_NUMBER  15
 

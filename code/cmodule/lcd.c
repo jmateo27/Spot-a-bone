@@ -1,94 +1,12 @@
-/* 16x2 LCD Initialization C Sample Code */
-/* Use freely to test wiring and derive your own LCD code. */
+#include "includes/lcd.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>
-#include <unistd.h>
-#include <string.h>
-#include <time.h>
-#include <string.h>
-#include "includes/gpio.h"
 #define NUM_CHARS_ON_DISPLAY 18
 #define SONGS_DIR "/mnt/remote/myApps/spotabone/comms/song.txt"
-
-// nanosleep wrapper function - accepts seconds and nanoseconds to construct delay
-static void delayFor(int, int);
-// Flash the E pin high to low to have the LCD consume the data
-static void pulseEnable();
-// Write 4 bits to their corresponding pin (D4, D5, D6, D7)
-static void write4Bits(uint8_t);
-// Write a char to the LCD
-static void writeChar(char);
-// Write a message to the LCD
-static void writeMessage(char *message);
-// Initialize the LCD
-static void LcdDisplay_init();
-// Cleanup the LCD
-static void LcdDisplay_cleanUp();
-// Helper for clean up
-static void clearDisplay();
 
 static void scrollText();
 
 static char msg[50];
 static int messageLength = 0;
-
-int main()
-{
-    char newMsg[50];
-    newMsg[0] = '\0';
-    FILE *ptr;
-    LcdDisplay_init();
-    while (1)
-    {
-        while (!newMsg[0])
-        {
-            delayFor(1, 0);
-            ptr = fopen(SONGS_DIR, "r");
-            if (ptr == NULL)
-            {
-                exit(1);
-            }
-            fscanf(ptr, "%[^\n]s", newMsg);
-
-            fclose(ptr);
-        }
-
-        fclose(fopen(SONGS_DIR, "w"));
-
-        messageLength = 0;
-        for (int i = 0; newMsg[i] != '\0'; i++)
-        {
-            msg[i] = newMsg[i];
-            messageLength++;
-        }
-        newMsg[0] = '\0';
-        for (int i = 0; i < 2; i++)
-            scrollText();
-        for (int i = 0; msg[i] != '\0'; i++)
-        {
-            msg[i] = '\0';
-        }
-
-        clearDisplay();
-
-    }
-
-    free(newMsg);
-    char *buff;
-    size_t sizeAllocated = 0;
-    printf("\nPRESS RETURN TO EXIT \n");
-    fflush(stdout);
-    getline(&buff, &sizeAllocated, stdin);
-
-    if (*buff == '\n')
-    {
-        LcdDisplay_cleanUp();
-    }
-
-    return 0;
-}
 
 static void LcdDisplay_init()
 {
