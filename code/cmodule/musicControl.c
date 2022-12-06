@@ -14,6 +14,7 @@ bool leftFirst = false;
 bool rightFirst = false;
 bool breakOutRight = false;
 bool breakOutLeft = false;
+bool isPaused = false;
 pthread_t leftPthread, rightPthread, middlePthread;
 
 void leftDip(){
@@ -38,6 +39,7 @@ void swipeLeft(){
     leftFirst = false;
     breakOutRight = true;
     breakOutLeft = true;
+    Comm_sendUserName("trac");
     printf("swipe to the left\n");
     return;
 }
@@ -49,6 +51,7 @@ void swipeRight(){
     rightFirst = false;
     breakOutRight = true;
     breakOutLeft = true;
+    Comm_sendUserName("skip");
     printf("swipe to the right\n");
     return;
 }
@@ -104,6 +107,13 @@ void* timeRight(){
 void* timeMiddle(){
     while(callClose){
         if(middleSide){
+            if (!isPaused){
+                Comm_sendUserName("pause");
+            }
+            else{
+                Comm_sendUserName("play");
+            }
+            isPaused = !isPaused;
             printf("PAUSE/PLAY\n");
             middleSide = false;
         }
