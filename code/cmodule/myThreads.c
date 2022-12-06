@@ -48,14 +48,14 @@ void *threadLCDScreen(void *args)
         {
             msleep(50)
             while ((pFile = fopen(SONGS_DIR, "r")) == NULL); // Wait if cannot open... (somewhat like a mutex)
-            if (ptr == NULL)
+            if (pFile == NULL)
             {
                 printf("null pointer...\n");
                 exit(1);
             }
-            fscanf(ptr, "%[^\n]s", newMsg);
+            fscanf(pFile, "%[^\n]s", newMsg);
 
-            fclose(ptr);
+            fclose(pFile);
         }
 
         fclose(fopen(SONGS_DIR, "w"));
