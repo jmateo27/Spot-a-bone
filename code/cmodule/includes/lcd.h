@@ -12,6 +12,7 @@
 #include <time.h>
 #include <string.h>
 #include "gpio.h"
+#include "timing.h"
 
 // Initialize the LCD
 static void LcdDisplay_init();
@@ -29,5 +30,8 @@ static void writeChar(char);
 static void writeMessage(char *message);
 // Helper for clean up
 static void clearDisplay();
+
+void scrollText(char *msg);
+
 
 #endif

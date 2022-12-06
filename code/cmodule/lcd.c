@@ -3,9 +3,6 @@
 #define NUM_CHARS_ON_DISPLAY 18
 #define SONGS_DIR "/mnt/remote/myApps/spotabone/comms/song.txt"
 
-static void scrollText();
-
-static char msg[50];
 static int messageLength = 0;
 
 static void LcdDisplay_init()
@@ -140,7 +137,7 @@ void clearDisplay()
     return;
 }
 
-void scrollText()
+void scrollText(char *msg)
 {
     int j = 0;
     int h;
@@ -150,21 +147,14 @@ void scrollText()
     for (int n = 0; n < printLength; n++)
     {
         h = 16;
-
-        // REPLACE WITH JUSTIN'S SLEEP FUNTION
-
-        delayFor(0, 100000000);
-
-        // REPLACE WITH JUSTIN'S SLEEP FUNTION
-
+        msleep(500);
         if (j > printLength)
             j = 0;
         for (int i = 0; i <= j; i++)
         {
-            scrollPadding[h - j] = msg[i]; // scrollpadding[16 - 0] = msg[ i = 0 ]
+            scrollPadding[h - j] = msg[i];
             h++;
         }
-        // lcdPosition(lcd, 0, 0);
         clearDisplay();
         writeMessage(scrollPadding);
         j++;

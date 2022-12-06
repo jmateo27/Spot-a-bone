@@ -8,6 +8,7 @@
         "i2c.h": "c",
         "mythreads.h": "c",
         "nfcreader.h": "c",
-        "motionsensor.h": "c"
+        "motionsensor.h": "c",
+        "lcd.h": "c"
     }
 }
