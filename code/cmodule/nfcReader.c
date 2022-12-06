@@ -90,14 +90,14 @@ int NFC_findOutWhichTag(const uint8_t *pbtData, const size_t szBytes)
 	return 0;
 }
 
-void NFC_queueUp(int tagNum)
-{
-	FILE *pFile;
-	while ((pFile = fopen(queueFileName, "ab")) == NULL); // Wait if cannot open... (somewhat like a mutex)
+// void NFC_queueUp(int tagNum)
+// {
+// 	FILE *pFile;
+// 	while ((pFile = fopen(queueFileName, "ab")) == NULL); // Wait if cannot open... (somewhat like a mutex)
 
-	char toWrite[maxTagTens];
-	sprintf(toWrite, "s%d\n", tagNum);
-	fprintf(pFile, toWrite);
+// 	char toWrite[maxTagTens];
+// 	sprintf(toWrite, "s%d\n", tagNum);
+// 	fprintf(pFile, toWrite);
 
-	fclose(pFile);
-}
+// 	fclose(pFile);
+// }

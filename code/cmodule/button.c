@@ -35,7 +35,7 @@ int endButton_read()
         return 0;
 }
 
-int endButton_read()
+int cameraButton_read()
 {
     char *fileName = CAMERABUTTON_pathValue;
     FILE *pFile = fopen(fileName, "r");

@@ -31,6 +31,6 @@ void NFC_init(NFC_descriptor *desc);
 int NFC_poll(NFC_descriptor *desc);
 int NFC_findOutWhichTag(const uint8_t *pbtData, const size_t szBytes);
 void NFC_cleanup(NFC_descriptor *desc);
-void NFC_queueUp(int tagNum);
+// void NFC_queueUp(int tagNum);
 
 #endif
