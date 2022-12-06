@@ -39,7 +39,7 @@ void swipeLeft(){
     leftFirst = false;
     breakOutRight = true;
     breakOutLeft = true;
-    Comm_sendUserName("trac");
+    Comm_sendUserName("track");
     printf("swipe to the left\n");
     return;
 }
