@@ -67,14 +67,6 @@
 #include <stdlib.h>
 #include <nfc/nfc.h>
 
-void print_nfc_target(const nfc_target *pnt, bool verbose)
-{
-  char *s;
-  str_nfc_target(&s, pnt, verbose);
-  printf("%s", s);
-  nfc_free(s);
-}
-
 int main(int argc, const char *argv[])
 {
     nfc_device *pnd;
