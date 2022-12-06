@@ -59,8 +59,6 @@
 
 #define MAX_DEVICE_COUNT 16
 
-static nfc_device *pnd = NULL;
-static nfc_context *context;
 
     // To compile this simple example:
 // $ gcc -o quick_start_example1 quick_start_example1.c -lnfc
@@ -80,7 +78,6 @@ void print_nfc_target(const nfc_target *pnt, bool verbose)
 int main(int argc, const char *argv[])
 {
     nfc_device *pnd;
-    nfc_target nt;
 
     // Allocate only a pointer to nfc_context
     nfc_context *context;
