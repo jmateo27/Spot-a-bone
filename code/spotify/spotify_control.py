@@ -48,8 +48,8 @@ class control:
         self.deviceID = self.get_current_playback()['device']['id']
 
     def print_playback(self):
-        self.setSongFile()
         print(f"Playing {self.sp.current_playback()['item']['name']} by {self.sp.current_playback()['item']['artists'][0]['name']} on {self.username} {self.sp.current_playback()['device']['name']}")
+        self.setSongFile()
 
     def print_queued(self,song_name, song_artist):
         print(f"Queued {song_name} by {song_artist} on {self.username} {self.sp.current_playback()['device']['name']}")
