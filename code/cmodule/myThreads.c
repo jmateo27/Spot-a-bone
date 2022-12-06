@@ -26,7 +26,7 @@ void *threadCameraButton(void *arg){
         if (!cameraButton_read()){ // button is pressed
             // Tell the camera to take photos
             Comm_commandCamera();
-            printf("commanding camera\n");
+            msleep(5000);
         }
     }
     return NULL;
