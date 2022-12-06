@@ -1,19 +1,22 @@
 import pipes
 import time
 import threading
-import os
+from connect_db import database
 import getpass
 # possible improvement is to get all the keys from the database at the beginning
 # and store them in dictionaries in here just so if we add more playlists etc, its fine
 
 class nfc_pipe:
     def __init__(self):
-        self.commands = ['skip','track','pause','play','close']
-        self.users = ['sina','justin','avash','raymond']
-        self.playlists = ['p1','p2','p3','p4','p5','p6','p7','p8','p9','p10']
-        self.songs = ['s1','s2','s3','s4','s5','s6','s7','s8','s9','s10']
-
         print ("Creating pipe and thread...")
+
+        db = database(None)
+        self.commands = ['skip','track','pause','play','close']
+        self.users =db.get_users()
+        self.playlists = db.get_playlists()
+        self.songs = db.get_songs()
+        db.cleanup()
+
         self.p = pipes.Template()
         username = getpass.getuser()        
         username = "/home/"+username
