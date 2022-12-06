@@ -70,7 +70,7 @@ void NFC_poll(NFC_descriptor *desc, tag* theTag)
 
 	if (nfc_initiator_select_passive_target(desc->dev, nmMifare, NULL, 0, &(desc->targ)) > 0)
 	{
-		*theTag = NFC_findOutWhichTag((desc->targ).nti.nai.abtUid, (desc->targ).nti.nai.szUidLen);
+		NFC_findOutWhichTag((desc->targ).nti.nai.abtUid, (desc->targ).nti.nai.szUidLen, theTag);
 	}
 	else{
 		*theTag = nullTag;

@@ -1,7 +1,7 @@
 #include "includes/lcd.h"
 
 static char *myMsg;
-static int myMessageLength;
+// static int myMessageLength;
 
 void LcdDisplay_init()
 {

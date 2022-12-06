@@ -11,7 +11,7 @@ void *threadNFC(void *arg)
     while (1)
     {
         NFC_poll(descPtr, &tagNum);
-        if (tagNum != prevTagNum && tagNum != nullTag)
+        if (!(tagNum.tagNum == prevTagNum.tagNum && tagNum.isSong == prevTagNum.isSong) && tagNum != nullTag)
         {   
             if (tagNum.isSong){
                 s = 's';
@@ -19,7 +19,7 @@ void *threadNFC(void *arg)
             else{
                 s = 'p';
             }
-            printf("Found tag %c%d\n", s tagNum.tagNum);
+            printf("Found tag %c%d\n", s, tagNum.tagNum);
             if (tagNum.tagNum != 0)
                 prevTagNum = tagNum;
             Comm_queueUpSong(tagNum.tagNum, s);
