@@ -1,6 +1,6 @@
 #include "includes/communication.h"
 
-int maxTagTens = 2;
+static int maxTagTens = 2;
 
 typedef int FD;
 

@@ -5,7 +5,7 @@ tagWithUID tagDatabase[] = {
 	{2, {0x04, 0x87, 0x6a, 0xb1, 0x70, 0x00, 0x00}}};
 
 int numTags = 2;
-int maxTagTens = 2;
+// int maxTagTens = 2;
 
 // char *queueFileName = "/mnt/remote/myApps/spotabone/comms/NFC.txt";
 
