@@ -40,7 +40,7 @@ void *threadLCDScreen(void *args)
     int messageLength = 0;
 
     newMsg[0] = '\0';
-    FILE *pFile;
+    // FILE *pFile;
     LcdDisplay_init();
     while (1)
     {
