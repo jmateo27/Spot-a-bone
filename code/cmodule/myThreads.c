@@ -37,6 +37,7 @@ void *threadPollNames(void *arg){
     while (1){
         if (Comm_getUserName(nameBuff)){
             Comm_sendUserName(nameBuff);
+            printf("%s found\n", nameBuff);
             msleep(2000);
             memset(nameBuff, '\0', strlen(nameBuff));
         }
