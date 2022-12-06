@@ -37,7 +37,6 @@ int main()
 
     pthread_cancel(nfc_t);
     pthread_cancel(cameraButton_t);
-    // pthread_cancel(motionSensor_t);
     NFC_cleanup(&nfc_desc);
     printf("Ending... Goodbye!\n");
     return 0;
