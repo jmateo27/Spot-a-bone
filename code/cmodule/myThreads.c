@@ -40,29 +40,13 @@ void *threadLCDScreen(void *args)
     int messageLength = 0;
 
     newMsg[0] = '\0';
-    // FILE *pFile;
     LcdDisplay_init();
     while (1)
     {
-        while (!Comm_getSongName(newMsg));
-        // while (!newMsg[0])
-        // {
-        //     msleep(50);
-        //     while ((pFile = fopen(SONGS_DIR, "r")) == NULL){
-        //         printf("im stuck");
-        //     }; // Wait if cannot open... (somewhat like a mutex)
-        //     if (pFile == NULL)
-        //     {
-        //         printf("null pointer...\n");
-        //         exit(1);
-        //     }
-        //     fscanf(pFile, "%[^\n]s", newMsg);
-
-        //     fclose(pFile);
-        // }
-
-        // fclose(fopen(SONGS_DIR, "w"));
-        printf("left\n");
+        while (!Comm_getSongName(newMsg)){
+            msleep(200);
+        }
+            
         messageLength = 0;
         for (int i = 0; newMsg[i] != '\0'; i++)
         {

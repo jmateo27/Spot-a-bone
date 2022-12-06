@@ -4,42 +4,6 @@
 #include <stdio.h>
 #include "includes/gpio.h"
 
-// #define LCD_RS  25               //Register select pin
-// #define LCD_E   24               //Enable Pin
-// #define LCD_D4  23               //Data pin 4
-// #define LCD_D5  22               //Data pin 5
-// #define LCD_D6  21               //Data pin 6
-// #define LCD_D7  18               //Data pin 7
-
-/*
-
-GPIO MAPPING:
-P9_25  --> RS
-P9_24  --> E
-P9_23  --> D4
-P9_22  --> D5 
-P9_21  --> D6
-P9_18  --> D7
-
-*/
-
-
-/*
-config-pin P9_27 gpio
-config-pin P9_28 gpio
-config-pin P9_29 gpio
-config-pin P9_30 gpio
-config-pin P9_25 gpio
-config-pin P9_24 gpio
-*/
-
-
-// #define D4_GPIO_NUMBER 115
-// #define D5_GPIO_NUMBER 113
-// #define D6_GPIO_NUMBER 111
-// #define D7_GPIO_NUMBER 112
-// #define RS_GPIO_NUMBER 117
-// #define E_GPIO_NUMBER  15
 #define D4_DIRECTION "/sys/class/gpio/gpio115/direction"
 #define D4_VALUE "/sys/class/gpio/gpio115/value"
 
