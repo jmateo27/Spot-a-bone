@@ -62,7 +62,7 @@ void *threadLCDScreen(void *args)
         // }
 
         // fclose(fopen(SONGS_DIR, "w"));
-
+        printf("left\n");
         messageLength = 0;
         for (int i = 0; newMsg[i] != '\0'; i++)
         {
