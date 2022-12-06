@@ -15,7 +15,7 @@ config-pin P9_18 i2c
 
 int main()
 {
-    pthread_t nfc_t, cameraButton_t, sendName_t;
+    pthread_t nfc_t, cameraButton_t;
     // pthread_t motionSensor_t;
     NFC_descriptor nfc_desc;
     endButton_init();
@@ -33,15 +33,10 @@ int main()
         return 1;
     }
 
-    if (pthread_create(&sendName_t, NULL, &threadPollNames, NULL) < 0)
-    {
-        perror("Could not create Poll names thread\n");
-        return 1;
-    }
-
     while (!endButton_read());
 
     pthread_cancel(nfc_t);
+    pthread_cancel(cameraButton_t);
     // pthread_cancel(motionSensor_t);
     NFC_cleanup(&nfc_desc);
     printf("Ending... Goodbye!\n");

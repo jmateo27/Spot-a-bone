@@ -14,6 +14,4 @@ void *threadNFC(void *arg);
 
 void *threadCameraButton(void *arg);
 
-void *threadPollNames(void *arg);
-
 #endif
