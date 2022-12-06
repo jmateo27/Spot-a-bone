@@ -11,7 +11,7 @@ void *threadNFC(void *arg)
     while (1)
     {
         NFC_poll(descPtr, &tagNum);
-        if (!(tagNum.tagNum == prevTagNum.tagNum && tagNum.isSong == prevTagNum.isSong) && tagNum != nullTag)
+        if (!(tagNum.tagNum == prevTagNum.tagNum && tagNum.isSong == prevTagNum.isSong) && !(tagNum.tagNum == nullTag.tagNum && tagNum.isSong == nullTag.isSong))
         {   
             if (tagNum.isSong){
                 s = 's';
