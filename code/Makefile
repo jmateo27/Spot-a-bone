@@ -1,6 +1,6 @@
 OUTDIR = $(HOME)/cmpt433/public/myApps/spotabone
 FACERECOG_DIR = facerecog
-TOCOPY = $(FACERECOG_DIR)/photodump/ $(FACERECOG_DIR)/samples/ $(FACERECOG_DIR)/stock/ $(FACERECOG_DIR)/camera.c $(FACERECOG_DIR)/Makefile
+TOCOPY = $(FACERECOG_DIR)/photodump/ $(FACERECOG_DIR)/stock/ $(FACERECOG_DIR)/camera.c $(FACERECOG_DIR)/Makefile
 
 all: nested-cmodule camera-copy nested-spotify remarks
 
