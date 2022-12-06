@@ -46,7 +46,8 @@ void *threadLCDScreen(void *args)
         while (!Comm_getSongName(newMsg)){
             msleep(200);
         }
-            
+
+        printf("%s\n",newMsg);            
         messageLength = 0;
         for (int i = 0; newMsg[i] != '\0'; i++)
         {

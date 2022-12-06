@@ -1,5 +1,7 @@
 #include "includes/lcd.h"
 
+
+
 void LcdDisplay_init()
 {
     // Set every GPIO pin to OUTPUT
