@@ -25,7 +25,7 @@ void *threadCameraButton(void *arg){
     while (1){
         if (cameraButton_read()){ // button is pressed
             // Tell the camera to take photos
-            
+            Comm_commandCamera();
             msleep(10000);
         }
     }
