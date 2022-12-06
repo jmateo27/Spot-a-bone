@@ -18,7 +18,8 @@ class nfc_pipe:
         username = getpass.getuser()        
         username = "/home/"+username
         self.nfctags = username+ "/cmpt433/public/myApps/spotabone/comms/NFC.txt"
-        
+        self.songNames = username+"/cmpt433/public/myApps/spotabone/comms/song.txt"
+
         self.songQueue = list()
         self.playlistQueue = list()
         self.commandQueue = list()
@@ -26,9 +27,12 @@ class nfc_pipe:
         self.searchSongQueue =  list()
 
         self.read_tags_mutex = True # set true if you can read from tag, false if we're emptying buffer
-        self.x = threading.Thread(target=self.readNFC, args=(0.5,))
+        self.nfcThread = threading.Thread(target=self.readNFC, args=(0.5,))
         self.event = threading.Event()
-        self.x.start()
+        self.nfcThread.start()
+
+    def getSongDirectory(self):
+        return self.songNames
 
     def readNFC(self,delay):
         while(1):
@@ -94,7 +98,7 @@ class nfc_pipe:
         return None
 
     def close_pipe(self):
-        self.x.join()
+        self.nfcThread.join()
 
     def stop_thread(self):
         self.event.set()

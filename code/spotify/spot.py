@@ -12,8 +12,9 @@ def wait():
         time.wait(0.1)
 
 pipe = nfc_pipe()
+songFileDirectory = pipe.getSongDirectory()
 isServicingRequest=False
-control = control("sina")
+control = control("sina",songFileDirectory)
 
 print("Please Scan User to Begin")
 

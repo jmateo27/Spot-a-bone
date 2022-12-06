@@ -5,9 +5,10 @@ from pprint import pprint
 import sys
 
 class control:
-    def __init__(self,username):
+    def __init__(self,username, songDirectory):
         self.db = database(username)
         token = self.db.get_token()
+        self.songFile = songDirectory
         self.sp = spotipy.Spotify(auth=token)
         self.username = username
         self.current_playback = self.get_current_playback()
@@ -47,6 +48,7 @@ class control:
         self.deviceID = self.get_current_playback()['device']['id']
 
     def print_playback(self):
+        self.setSongFile()
         print(f"Playing {self.sp.current_playback()['item']['name']} by {self.sp.current_playback()['item']['artists'][0]['name']} on {self.username} {self.sp.current_playback()['device']['name']}")
 
     def print_queued(self,song_name, song_artist):
@@ -162,6 +164,10 @@ class control:
             self.sp.add_to_queue(song_info[1],song_info[3])
             time.sleep(0.5)
             self.print_queued(song_info[3],song_info[2])
+
+    def setSongFile(self):
+        with open(self.songFile, "a+") as f:
+            f.write(f"{self.sp.current_playback()['item']['name']} by {self.sp.current_playback()['item']['artists'][0]['name']}")
 
     def cleanup(self):
         print("Closing Database...")
