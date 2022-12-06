@@ -62,114 +62,83 @@
 static nfc_device *pnd = NULL;
 static nfc_context *context;
 
-static void stop_polling(int sig)
-{
-    (void)sig;
-    if (pnd != NULL)
-        nfc_abort_command(pnd);
-    else
-    {
-        nfc_exit(context);
-        exit(EXIT_FAILURE);
-    }
-}
+    // To compile this simple example:
+// $ gcc -o quick_start_example1 quick_start_example1.c -lnfc
+// ./quick_start_example1
 
-static void
-print_usage(const char *progname)
+#include <stdlib.h>
+#include <nfc/nfc.h>
+
+void print_nfc_target(const nfc_target *pnt, bool verbose)
 {
-    printf("usage: %s [-v]\n", progname);
-    printf("  -v\t verbose display\n");
+  char *s;
+  str_nfc_target(&s, pnt, verbose);
+  printf("%s", s);
+  nfc_free(s);
 }
 
 int main(int argc, const char *argv[])
 {
-    bool verbose = false;
+    nfc_device *pnd;
+    nfc_target nt;
 
-    signal(SIGINT, stop_polling);
+    // Allocate only a pointer to nfc_context
+    nfc_context *context;
+
+    // Initialize libnfc and set the nfc_context
+    nfc_init(&context);
+    if (context == NULL) {
+      printf("Unable to init libnfc (malloc)\n");
+      exit(EXIT_FAILURE);
+    }
 
     // Display libnfc version
     const char *acLibnfcVersion = nfc_version();
-
+    (void)argc;
     printf("%s uses libnfc %s\n", argv[0], acLibnfcVersion);
-    if (argc != 1)
-    {
-        if ((argc == 2) && (0 == strcmp("-v", argv[1])))
-        {
-            verbose = true;
-        }
-        else
-        {
-            print_usage(argv[0]);
-            exit(EXIT_FAILURE);
-        }
-    }
 
-    const uint8_t uiPollNr = 20;
-    const uint8_t uiPeriod = 2;
-    const nfc_modulation nmModulations[6] = {
-        {.nmt = NMT_ISO14443A, .nbr = NBR_106},
-        {.nmt = NMT_ISO14443B, .nbr = NBR_106},
-        {.nmt = NMT_FELICA, .nbr = NBR_212},
-        {.nmt = NMT_FELICA, .nbr = NBR_424},
-        {.nmt = NMT_JEWEL, .nbr = NBR_106},
-        {.nmt = NMT_ISO14443BICLASS, .nbr = NBR_106},
-    };
-    const size_t szModulations = 6;
-
-    nfc_target nt;
-    int res = 0;
-
-    nfc_init(&context);
-    if (context == NULL)
-    {
-        ERR("Unable to init libnfc (malloc)");
-        exit(EXIT_FAILURE);
-    }
-
+    // Open, using the first available NFC device
     pnd = nfc_open(context, NULL);
 
-    if (pnd == NULL)
-    {
-        ERR("%s", "Unable to open NFC device.");
-        nfc_exit(context);
-        exit(EXIT_FAILURE);
+    if (pnd == NULL) {
+      printf("ERROR: %s\n", "Unable to open NFC device.");
+      exit(EXIT_FAILURE);
     }
-
-    if (nfc_initiator_init(pnd) < 0)
-    {
-        nfc_perror(pnd, "nfc_initiator_init");
-        nfc_close(pnd);
-        nfc_exit(context);
-        exit(EXIT_FAILURE);
+    // Set opened NFC device to initiator mode
+    if (nfc_initiator_init(pnd) < 0) {
+      nfc_perror(pnd, "nfc_initiator_init");
+      exit(EXIT_FAILURE);
     }
 
     printf("NFC reader: %s opened\n", nfc_device_get_name(pnd));
-    printf("NFC device will poll during %ld ms (%u pollings of %lu ms for %" PRIdPTR " modulations)\n", (unsigned long)uiPollNr * szModulations * uiPeriod * 150, uiPollNr, (unsigned long)uiPeriod * 150, szModulations);
-    if ((res = nfc_initiator_poll_target(pnd, nmModulations, szModulations, uiPollNr, uiPeriod, &nt)) < 0)
-    {
-        nfc_perror(pnd, "nfc_initiator_poll_target");
-        nfc_close(pnd);
-        nfc_exit(context);
-        exit(EXIT_FAILURE);
+
+    nfc_target ant[1];
+    nfc_modulation nm;
+    nm.nmt = NMT_ISO14443B;
+    nm.nbr = NBR_106;
+
+    nfc_initiator_list_passive_targets(pnd,nm,ant,1);
+    printf("%s\n",nfc_strerror(pnd)); // print Success
+
+    nfc_target ant2[1];
+    nfc_modulation nm2;
+    nm2.nmt = NMT_ISO14443B2SR;
+    nm2.nbr = NBR_106;
+
+    int res = 0;
+    int n = 0;
+    res = nfc_initiator_list_passive_targets(pnd, nm2, ant2, 1);
+    printf("%s\n",nfc_strerror(pnd)); // print Success
+
+    // printf("Cart identifier: %s\n", nt.nti.nsi.abtUID);
+    for (n = 0; n < res; n++) {
+      print_nfc_target(&ant2[n], true);
+      printf("\n");
     }
 
-    if (res > 0)
-    {
-        print_nfc_target(&nt, verbose);
-        printf("Waiting for card removing...");
-        fflush(stdout);
-        while (0 == nfc_initiator_target_is_present(pnd, NULL))
-        {
-        }
-        nfc_perror(pnd, "nfc_initiator_target_is_present");
-        printf("done.\n");
-    }
-    else
-    {
-        printf("No target found.\n");
-    }
-
+    // Close NFC device
     nfc_close(pnd);
+    // Release the context
     nfc_exit(context);
     exit(EXIT_SUCCESS);
 }
