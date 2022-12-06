@@ -1,8 +1,6 @@
 #include "includes/lcd.h"
 
-static char msg[50];
-
-static void LcdDisplay_init()
+void LcdDisplay_init()
 {
     // Set every GPIO pin to OUTPUT
     GPIO_writeDirection(RS_GPIO_NUMBER, "out");
@@ -175,7 +173,7 @@ void writeChar(char c)
     write4Bits(lower_bits);
 }
 
-static void pulseEnable()
+void pulseEnable()
 {
     struct timespec pulseDelay = {0, 1000000};
     GPIO_writeValue(E_GPIO_NUMBER, "1");
@@ -184,7 +182,7 @@ static void pulseEnable()
     nanosleep(&pulseDelay, (struct timespec *)NULL);
 }
 
-static void write4Bits(uint8_t value)
+void write4Bits(uint8_t value)
 {
     char strBit[2];
     strBit[1] = '\0';
@@ -203,7 +201,7 @@ static void write4Bits(uint8_t value)
     pulseEnable();
 }
 
-static void delayFor(int s, int ns)
+void delayFor(int s, int ns)
 {
     struct timespec delay = {s, ns};
     nanosleep(&delay, (struct timespec *)NULL);
