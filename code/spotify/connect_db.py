@@ -50,6 +50,43 @@ class database:
             self.set_token()
         return self.token
 
+    def get_users(self):
+        get_users_query = "SELECT username FROM USER_ID"
+        cursor = self.conn.execute(get_users_query)
+
+        users = cursor.fetchall()
+        filtered_users = list(filter(None, users))
+
+        self.conn.commit()
+        return filtered_users
+
+    def get_playlists(self):
+        get_playlists_query = "SELECT tagnum FROM NFC_PLAYLIST_URI"
+        cursor = self.conn.execute(get_playlists_query)
+
+        playlists = cursor.fetchall()
+        filtered_playlists = list(filter(None, playlists))
+
+        for i in range(len(filtered_playlists)):
+            filtered_playlists[i] = f"p{filtered_playlists[i]}"
+
+        self.conn.commit()
+        return filtered_playlists
+
+
+    def get_songs(self):
+        get_song_query = "SELECT tagnum FROM NFC_URI"
+        cursor = self.conn.execute(get_song_query)
+
+        songs = cursor.fetchall()
+        filtered_songs = list(filter(None, songs))
+
+        for i in range(len(filtered_songs)):
+            filtered_songs[i] = f"s{filtered_songs[i]}"
+
+        self.conn.commit()
+        return filtered_songs
+
     def get_tag_uri(self,tagID):
         get_uri_query = "SELECT uri FROM NFC_URI WHERE tagnum=?"
         cursor = self.conn.execute(get_uri_query,tagID)
