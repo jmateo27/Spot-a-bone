@@ -11,12 +11,13 @@ class database:
     def __init__(self,username):
         self.conn = connect_db()
         self.delete_old_tokens()
-        self.username = username
-        self.userID=str()
-        self.get_user_id()
-        self.scope = 'user-top-read user-library-read user-library-modify user-read-private playlist-modify-public user-modify-playback-state user-read-playback-state user-read-currently-playing'
-        self.token = str()
-        self.get_token()
+        if(username):
+            self.username = username
+            self.userID=str()
+            self.get_user_id()
+            self.scope = 'user-top-read user-library-read user-library-modify user-read-private playlist-modify-public user-modify-playback-state user-read-playback-state user-read-currently-playing'
+            self.token = str()
+            self.get_token()
 
     def delete_old_tokens(self):
         delete_old_tokens="DELETE FROM SPOTIFYTOKEN WHERE DATEDIFF(SECOND, TIME_CREATED, CURRENT_TIMESTAMP) > 3540"
