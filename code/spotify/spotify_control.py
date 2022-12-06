@@ -48,6 +48,7 @@ class control:
         self.deviceID = self.get_current_playback()['device']['id']
 
     def print_playback(self):
+        self.setSongFile()
         print(f"Playing {self.sp.current_playback()['item']['name']} by {self.sp.current_playback()['item']['artists'][0]['name']} on {self.username} {self.sp.current_playback()['device']['name']}")
 
     def print_queued(self,song_name, song_artist):
@@ -65,6 +66,7 @@ class control:
                 self.sp.start_playback(uris=[uri])
             except:
                 print("No Active Device")
+        self.print_playback()
                 
 
     def shuffle_playlist_by_id(self,playlistNum):
@@ -158,9 +160,7 @@ class control:
                 print("No active device!")
                 return
             time.sleep(0.5)
-            print("I'm Here")
             self.print_playback()
-            self.setSongFile()
         else:
             self.sp.add_to_queue(song_info[1],song_info[3])
             time.sleep(0.5)
