@@ -50,6 +50,7 @@ void *threadLCDScreen(void *args)
             ptr = fopen(SONGS_DIR, "r");
             if (ptr == NULL)
             {
+                printf("null pointer...\n");
                 exit(1);
             }
             fscanf(ptr, "%[^\n]s", newMsg);
@@ -88,5 +89,5 @@ void *threadLCDScreen(void *args)
         LcdDisplay_cleanUp();
     }
 
-    return 0;
+    return NULL;
 }
