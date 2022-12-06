@@ -22,7 +22,7 @@ class myThreads:
 
         # Initialize image encodings
         self.photos_dir = username + "/cmpt433/public/myApps/spotabone/stock"
-        self.photos_dir = username + "/cmpt433/public/myApps/spotabone/photos"
+        self.sample_dir = username + "/cmpt433/public/myApps/spotabone/photos"
         self.img_mapping = []
 
         print("Starting to initialize face recognition")
