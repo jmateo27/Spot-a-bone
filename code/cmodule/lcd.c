@@ -139,25 +139,25 @@ void scrollText(char *msg, int messageLength)
     char scrollPadding[] = "                ";
     int printLength;
     printLength = strlen(scrollPadding) + messageLength;
-    for (int n = 0; n < printLength; n++)
-    {
-        h = 16;
-        msleep(500);
-        if (j > printLength)
-            j = 0;
-        for (int i = 0; i <= j; i++)
-        {
-            scrollPadding[h - j] = msg[i];
-            h++;
-        }
-        clearDisplay();
-        writeMessage(scrollPadding);
-        j++;
-        if (n >= 16)
-        {
-            break;
-        }
-    }
+    // for (int n = 0; n < printLength; n++)
+    // {
+    //     h = 16;
+    //     msleep(500);
+    //     if (j > printLength)
+    //         j = 0;
+    //     for (int i = 0; i <= j; i++)
+    //     {
+    //         scrollPadding[h - j] = msg[i];
+    //         h++;
+    //     }
+    //     clearDisplay();
+    //     writeMessage(scrollPadding);
+    //     j++;
+    //     if (n >= 16)
+    //     {
+    //         break;
+    //     }
+    // }
 }
 
 void writeMessage(char *message)
