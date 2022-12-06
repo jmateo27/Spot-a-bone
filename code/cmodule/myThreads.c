@@ -43,27 +43,6 @@ void *threadLCDScreen(void *args)
     LcdDisplay_init();
     while (1)
     {
-        // while (!Comm_getSongName(newMsg)){
-        //     msleep(200);
-        // }
-
-        // printf("%s\n",newMsg);            
-        // messageLength = 0;
-        // for (int i = 0; newMsg[i] != '\0'; i++)
-        // {
-        //     msg[i] = newMsg[i];
-        //     messageLength++;
-        // }
-        // newMsg[0] = '\0';
-        // for (int i = 0; i < 2; i++)
-        //     scrollText(msg, messageLength);
-        // for (int i = 0; msg[i] != '\0'; i++)
-        // {
-        //     msg[i] = '\0';
-        // }
-
-        // clearDisplay();
-
         while (!newMsg[0])
         {
             delayFor(1, 0);
