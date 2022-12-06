@@ -12,7 +12,7 @@ enum commFiles_e{
     songName
 };
 
-char *commFiles[] = {
+char *commFile[] = {
     "/mnt/remote/myApps/spotabone/comms/takePhotos.txt",
     "/mnt/remote/myApps/spotabone/comms/name.txt",
     "/mnt/remote/myApps/spotabone/comms/NFC.txt",
@@ -22,7 +22,7 @@ char *commFiles[] = {
 void Comm_queueUpSong(int tagNum)
 {
 	FILE *pFile;
-	while ((pFile = fopen(commFiles[commandSpotify], "ab")) == NULL); // Wait if cannot open... (somewhat like a mutex)
+	while ((pFile = fopen(commFile[commandSpotify], "ab")) == NULL); // Wait if cannot open... (somewhat like a mutex)
 
 	char toWrite[maxTagTens];
 	sprintf(toWrite, "s%d\n", tagNum);
@@ -34,7 +34,7 @@ void Comm_queueUpSong(int tagNum)
 
 void Comm_commandCamera(){
 	FILE *pFile;
-	while ((pFile = fopen(commFiles[commandCamera], "ab")) == NULL); // Wait if cannot open... (somewhat like a mutex)
+	while ((pFile = fopen(commFile[commandCamera], "ab")) == NULL); // Wait if cannot open... (somewhat like a mutex)
 
 	char toWrite[maxTagTens];
 	sprintf(toWrite, "s%d\n", 1);
@@ -45,7 +45,7 @@ void Comm_commandCamera(){
 }
 
 bool Comm_getUserName(char *name){
-    char *fileName = commFiles[userName];
+    char *fileName = commFile[userName];
 	FD pFile = open(fileName, O_RDWR);
 	if (!pFile)
 	{
@@ -70,7 +70,7 @@ bool Comm_getUserName(char *name){
 }
 
 bool Comm_getSongName(char *song){
-    char *filename = commFiles[songName];
+    char *filename = commFile[songName];
 	FD pFile = open(filename, O_RDWR);
 	if (!pFile)
 	{
