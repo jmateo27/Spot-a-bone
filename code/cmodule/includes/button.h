@@ -9,11 +9,16 @@
 #define ENDBUTTON_pathactiveLow "/sys/class/gpio/gpio72/active_low"
 #define ENDBUTTON_pathDirection "/sys/class/gpio/gpio72/direction"
 
+#define CAMERABUTTON_pathValue "/sys/class/gpio/gpio30/value"
+#define CAMERABUTTON_pathactiveLow "/sys/class/gpio/gpio30/active_low"
+#define CAMERABUTTON_pathDirection "/sys/class/gpio/gpio30/direction"
+
 static const int MAX_LENGTH = 1024;
 
 void endButton_init();
+void cameraButton_init();
 
-// Will return the integer form of the reading from fileName
 int endButton_read();
+int cameraButton_read();
 
 #endif

@@ -9,6 +9,7 @@
 #include <linux/i2c.h>
 #include <linux/i2c-dev.h>
 #include <nfc/nfc.h>
+
 #include "common.h"
 
 #define UID_len 7

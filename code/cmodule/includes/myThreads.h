@@ -2,15 +2,15 @@
 #define MYTHREADS_H_
 
 #include <pthread.h>
+
 #include "nfcReader.h"
 #include "motionSensor.h"
 #include "button.h"
-#include <time.h>
+#include "timing.h"
+#include "communication.h"
 
 void *threadNFC(void *arg);
 
-void *threadMotionSensor(void *arg);
-
-void sleepForMs(long long delayInMs);
+void *threadCameraButton(void *arg);
 
 #endif

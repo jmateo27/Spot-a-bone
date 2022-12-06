@@ -14,50 +14,20 @@ void *threadNFC(void *arg)
             printf("Found tag #%d\n", tagNum);
             if (tagNum != 0)
                 prevTagNum = tagNum;
-            NFC_queueUp(tagNum);
+            Comm_queueUpSong(tagNum);
+            msleep(50);
         }
     }
     return NULL;
 }
 
-void *threadMotionSensor(void *arg)
-{
-    MotionSensor_init(left);
-    // MotionSensor_init(right);
-    printf("Calibrating motion sensors\n");
-    sleepForMs(1000);
-    printf("Finished calibrating motion sensor\n");
-    int motion = 0, pirState = 0;
-    while (1)
-    {
-        motion = MotionSensor_isThereMotion(left);
-        if (motion == 1)
-        {
-            if (pirState == 0)
-            {
-                printf("Motion detected!\n");
-                pirState = 1;
-            }
-        }
-        else
-        {
-            if (pirState == 1)
-            {
-                printf("Motion ended!\n");
-                pirState = 0;
-            }
+void *threadCameraButton(void *arg){
+    while (1){
+        if (cameraButton_read()){ // button is pressed
+            // Tell the camera to take photos
+            
+            msleep(10000);
         }
     }
     return NULL;
-}
-
-void sleepForMs(long long delayInMs)
-{
-    const long long NS_PER_MS = 1000 * 1000;
-    const long long NS_PER_SECOND = 1000000000;
-    long long delayNs = delayInMs * NS_PER_MS;
-    int seconds = delayNs / NS_PER_SECOND;
-    int nanoseconds = delayNs % NS_PER_SECOND;
-    struct timespec reqDelay = {seconds, nanoseconds};
-    nanosleep(&reqDelay, (struct timespec *)NULL);
 }
