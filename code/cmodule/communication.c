@@ -25,7 +25,7 @@ void Comm_queueUpSong(int tagNum, char s)
 	while ((pFile = fopen(commFile[commandSpotify], "ab")) == NULL); // Wait if cannot open... (somewhat like a mutex)
 
 	char toWrite[maxTagTens];
-	sprintf(toWrite, "s%c%d\n", s, tagNum);
+	sprintf(toWrite, "%c%d\n", s, tagNum);
 	fprintf(pFile, toWrite);
 
 	fclose(pFile);
