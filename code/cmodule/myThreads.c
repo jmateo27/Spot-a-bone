@@ -15,7 +15,7 @@ void *threadNFC(void *arg)
             if (tagNum != 0)
                 prevTagNum = tagNum;
             Comm_queueUpSong(tagNum);
-            msleep(50);
+            msleep(100);
         }
     }
     return NULL;
