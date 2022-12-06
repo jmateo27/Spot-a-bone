@@ -1,7 +1,5 @@
 #include "includes/lcd.h"
 
-
-
 void LcdDisplay_init()
 {
     // Set every GPIO pin to OUTPUT
@@ -155,6 +153,10 @@ void scrollText(char *msg, int messageLength)
         clearDisplay();
         writeMessage(scrollPadding);
         j++;
+        if (n >= 16)
+        {
+            break;
+        }
     }
 }
 
