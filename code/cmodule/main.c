@@ -18,7 +18,7 @@ int main()
     pthread_t nfc_t;
     // pthread_t motionSensor_t;
     NFC_descriptor nfc_desc;
-    Button_init();
+    endButton_init();
 
     if (pthread_create(&nfc_t, NULL, &threadNFC, &nfc_desc) < 0)
     {
