@@ -67,6 +67,7 @@ void NFC_poll(NFC_descriptor *desc, tag* theTag)
 		.nmt = NMT_ISO14443A,
 		.nbr = NBR_106,
 	};
+	tag nullTag = {0, false};
 
 	if (nfc_initiator_select_passive_target(desc->dev, nmMifare, NULL, 0, &(desc->targ)) > 0)
 	{

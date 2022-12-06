@@ -5,7 +5,9 @@
 void *threadNFC(void *arg)
 {
     NFC_descriptor *descPtr = (NFC_descriptor *)arg;
-    tag tagNum, prevTagNum = {0, false};
+    tag nullTag = {0, false};
+    tag tagNum, prevTagNum = nullTag;
+
     NFC_init(descPtr);
     char s = 's';
     while (1)

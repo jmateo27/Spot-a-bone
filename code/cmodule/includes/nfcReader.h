@@ -32,8 +32,6 @@ typedef struct
     nfc_context *cont;
 } NFC_descriptor;
 
-tag nullTag = {0, false};
-
 void NFC_init(NFC_descriptor *desc);
 void NFC_poll(NFC_descriptor *desc, tag* theTag);
 void NFC_findOutWhichTag(const uint8_t *pbtData, const size_t szBytes, tag* theTag);
