@@ -14,9 +14,14 @@
 
 #define UID_len 7
 
+typedef struct{
+	int tagNum;
+	bool isSong;
+} tag;
+
 typedef struct
 {
-    int tagNumber;
+    tag theTag;
     uint8_t UID[7];
 } tagWithUID;
 
@@ -27,9 +32,11 @@ typedef struct
     nfc_context *cont;
 } NFC_descriptor;
 
+tag nullTag = {0, false};
+
 void NFC_init(NFC_descriptor *desc);
-int NFC_poll(NFC_descriptor *desc);
-int NFC_findOutWhichTag(const uint8_t *pbtData, const size_t szBytes);
+void NFC_poll(NFC_descriptor *desc, tag* theTag);
+void NFC_findOutWhichTag(const uint8_t *pbtData, const size_t szBytes, tag* theTag);
 void NFC_cleanup(NFC_descriptor *desc);
 // void NFC_queueUp(int tagNum);
 

@@ -5,17 +5,24 @@
 void *threadNFC(void *arg)
 {
     NFC_descriptor *descPtr = (NFC_descriptor *)arg;
-    int tagNum = 0, prevTagNum = 0;
+    tag tagNum, prevTagNum = {0, false};
     NFC_init(descPtr);
-
+    char s = 's';
     while (1)
     {
-        if ((tagNum = NFC_poll(descPtr)) != prevTagNum && tagNum != 0)
-        {
-            printf("Found tag #%d\n", tagNum);
-            if (tagNum != 0)
+        NFC_poll(descPtr, &tagNum);
+        if (tagNum != prevTagNum && tagNum != nullTag)
+        {   
+            if (tagNum.isSong){
+                s = 's';
+            }
+            else{
+                s = 'p';
+            }
+            printf("Found tag %c%d\n", s tagNum.tagNum);
+            if (tagNum.tagNum != 0)
                 prevTagNum = tagNum;
-            Comm_queueUpSong(tagNum);
+            Comm_queueUpSong(tagNum.tagNum, s);
         }
 
     }
