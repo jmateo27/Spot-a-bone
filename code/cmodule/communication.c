@@ -4,7 +4,15 @@ int maxTagTens = 2;
 
 typedef int FD;
 
-char **commFiles = {
+typedef enum commFiles_e commFiles;
+enum commFiles_e{
+    commandCamera,
+    userName,
+    commandSpotify,
+    songName
+};
+
+char *commFiles[] = {
     "/mnt/remote/myApps/spotabone/comms/takePhotos.txt",
     "/mnt/remote/myApps/spotabone/comms/name.txt",
     "/mnt/remote/myApps/spotabone/comms/NFC.txt",
