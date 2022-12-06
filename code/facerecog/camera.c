@@ -36,23 +36,24 @@ void writeReadyToAnalyzePhotos();
 
 int msleep(long msec)
 {
-    struct timespec ts;
-    int res;
+	struct timespec ts;
+	int res;
 
-    if (msec < 0)
-    {
-        errno = EINVAL;
-        return -1;
-    }
+	if (msec < 0)
+	{
+		errno = EINVAL;
+		return -1;
+	}
 
-    ts.tv_sec = msec / 1000;
-    ts.tv_nsec = (msec % 1000) * 1000000;
+	ts.tv_sec = msec / 1000;
+	ts.tv_nsec = (msec % 1000) * 1000000;
 
-    do {
-        res = nanosleep(&ts, &ts);
-    } while (res && errno == EINTR);
+	do
+	{
+		res = nanosleep(&ts, &ts);
+	} while (res && errno == EINTR);
 
-    return res;
+	return res;
 }
 
 struct buffer
@@ -79,23 +80,25 @@ static void xioctl(int fh, int request, void *arg)
 
 int main(int argc, char **argv)
 {
+	struct v4l2_format fmt;
+	struct v4l2_buffer buf;
+	struct v4l2_requestbuffers req;
+	enum v4l2_buf_type type;
+	fd_set fds;
+	struct timeval tv;
+	int r, fd = -1;
+	unsigned int i, n_buffers;
+	char *dev_name = "/dev/video0";
+	char out_name[256], new_name[256];
+	FILE *fout;
 
 	while (1)
 	{
-		while (!isCommand()){
+		while (!isCommand())
+		{
 			msleep(50);
 		};
-		struct v4l2_format fmt;
-		struct v4l2_buffer buf;
-		struct v4l2_requestbuffers req;
-		enum v4l2_buf_type type;
-		fd_set fds;
-		struct timeval tv;
-		int r, fd = -1;
-		unsigned int i, n_buffers;
-		char *dev_name = "/dev/video0";
-		char out_name[256], new_name[256];
-		FILE *fout;
+		fd = -1;
 		struct buffer *buffers;
 
 		fd = v4l2_open(dev_name, O_RDWR | O_NONBLOCK, 0);
@@ -243,14 +246,16 @@ bool isCommand()
 	}
 }
 
-void writeReadyToAnalyzePhotos(){
+void writeReadyToAnalyzePhotos()
+{
 	FILE *pFile = fopen(analyzeFile, "w");
-    if (pFile == NULL) {
-        printf("ERROR: Unable to open export file.\n");
-        exit(1);
-    }
+	if (pFile == NULL)
+	{
+		printf("ERROR: Unable to open export file.\n");
+		exit(1);
+	}
 
-    fprintf(pFile, "1");
+	fprintf(pFile, "1");
 
-    fclose(pFile);
+	fclose(pFile);
 }
