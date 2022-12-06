@@ -134,11 +134,11 @@ void clearDisplay()
 
 void scrollText(char *msg, int messageLength)
 {
-    int j = 0;
-    int h;
-    char scrollPadding[] = "                ";
-    int printLength;
-    printLength = strlen(scrollPadding) + messageLength;
+    // int j = 0;
+    // int h;
+    // char scrollPadding[] = "                ";
+    // int printLength;
+    // printLength = strlen(scrollPadding) + messageLength;
     // for (int n = 0; n < printLength; n++)
     // {
     //     h = 16;
