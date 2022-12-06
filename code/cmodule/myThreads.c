@@ -46,7 +46,7 @@ void *threadLCDScreen(void *args)
     {
         while (!newMsg[0])
         {
-            msleep(50)
+            msleep(50);
             while ((pFile = fopen(SONGS_DIR, "r")) == NULL); // Wait if cannot open... (somewhat like a mutex)
             if (pFile == NULL)
             {
