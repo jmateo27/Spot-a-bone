@@ -19,6 +19,7 @@ void Comm_queueUpSong(int tagNum)
 	fprintf(pFile, toWrite);
 
 	fclose(pFile);
+	return;
 }
 
 void Comm_commandCamera(){
@@ -30,6 +31,7 @@ void Comm_commandCamera(){
 	fprintf(pFile, toWrite);
 
 	fclose(pFile);
+	return;
 }
 
 bool Comm_getUserName(char *name){
