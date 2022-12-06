@@ -8,6 +8,7 @@
 #include <unistd.h>
 
 void Comm_queueUpSong(int tagNum);
+void Comm_sendUserName(char *name);
 void Comm_commandCamera();
 bool Comm_getUserName(char *name);
 bool Comm_getSongName(char *song);

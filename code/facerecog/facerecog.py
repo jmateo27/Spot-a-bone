@@ -14,8 +14,10 @@ import face_recognition
 class myThreads:
     def __init__(self):
         self.isStart = False
-        self.commandfile = "camera.txt"
-        self.namefile = "name.txt"
+        username = getpass.getuser()        
+        username = "/home/"+username
+        self.commandfile = username + "/cmpt433/public/myApps/spotabone/comms/camera.txt"
+        self.namefile = username + "/cmpt433/public/myApps/spotabone/comms/name.txt"
 
         # Initialize image encodings
         self.photos_dir = 'stock'

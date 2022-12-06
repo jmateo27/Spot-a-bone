@@ -2,6 +2,7 @@
 #define MYTHREADS_H_
 
 #include <pthread.h>
+#include <string.h>
 
 #include "nfcReader.h"
 #include "motionSensor.h"

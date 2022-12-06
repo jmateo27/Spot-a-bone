@@ -32,6 +32,17 @@ void Comm_queueUpSong(int tagNum)
 	return;
 }
 
+void Comm_sendUserName(char *name)
+{
+	FILE *pFile;
+	while ((pFile = fopen(commFile[commandSpotify], "ab")) == NULL); // Wait if cannot open... (somewhat like a mutex)
+
+	fprintf(pFile, name);
+
+	fclose(pFile);
+	return;
+}
+
 void Comm_commandCamera(){
 	FILE *pFile;
 	while ((pFile = fopen(commFile[commandCamera], "ab")) == NULL); // Wait if cannot open... (somewhat like a mutex)

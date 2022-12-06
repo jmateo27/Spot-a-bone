@@ -31,3 +31,15 @@ void *threadCameraButton(void *arg){
     }
     return NULL;
 }
+
+void *threadPollNames(void *arg){
+    char nameBuff[24]; // max length of name is 24
+    while (1){
+        if (Comm_getUserName(nameBuff)){
+            Comm_sendUserName(nameBuff);
+            msleep(2000);
+            memset(nameBuff, '\0', strlen(nameBuff));
+        }
+        msleep(50);
+    }
+}
