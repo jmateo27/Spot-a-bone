@@ -20,6 +20,7 @@ int main()
     NFC_descriptor nfc_desc;
     endButton_init();
     cameraButton_init();
+    startMotionSensorThreads();
 
     if (pthread_create(&nfc_t, NULL, &threadNFC, &nfc_desc) < 0)
     {
@@ -40,6 +41,8 @@ int main()
     }
 
     while (!endButton_read());
+    
+    lightDipEnd();
 
     pthread_cancel(nfc_t);
     pthread_cancel(cameraButton_t);

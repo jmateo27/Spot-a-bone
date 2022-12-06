@@ -9,6 +9,8 @@
         "mythreads.h": "c",
         "nfcreader.h": "c",
         "motionsensor.h": "c",
-        "lcd.h": "c"
+        "lcd.h": "c",
+        "lightdipanalyzer.h": "c",
+        "testmain.h": "c"
     }
 }

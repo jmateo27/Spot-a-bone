@@ -7,4 +7,6 @@
 
 int msleep(long msec);
 
+void sleepforXnanoseconds(long X);
+
 #endif 

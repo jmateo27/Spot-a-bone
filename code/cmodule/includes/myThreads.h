@@ -10,6 +10,7 @@
 #include "timing.h"
 #include "communication.h"
 #include "lcd.h"
+#include "lightDipAnalyzer.h"
 
 void *threadNFC(void *arg);
 

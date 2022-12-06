@@ -23,3 +23,10 @@ int msleep(long msec)
 
     return res;
 }
+
+void sleepforXnanoseconds(long X){
+   struct timespec tim, tim2;
+   tim.tv_sec = 0;
+   tim.tv_nsec = X;
+   nanosleep(&tim , &tim2);
+}
