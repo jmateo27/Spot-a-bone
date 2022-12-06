@@ -21,7 +21,7 @@ class myThreads:
 
         # Initialize image encodings
         self.photos_dir = 'stock'
-        self.sample_dir = 'samples'
+        self.sample_dir = 'photos'
         self.img_mapping = []
 
         print("Starting to initialize face recognition")
