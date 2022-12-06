@@ -56,20 +56,21 @@ class database:
         cursor = self.conn.execute(get_users_query)
 
         users = cursor.fetchall()
-        filtered_users = list(filter(None, users))
+        filtered_user=list()
+        for i in users:
+            filtered_user.append(i[0])
 
         self.conn.commit()
-        return filtered_users
+        return filtered_user
 
     def get_playlists(self):
         get_playlists_query = "SELECT tagnum FROM NFC_PLAYLIST_URI"
         cursor = self.conn.execute(get_playlists_query)
 
         playlists = cursor.fetchall()
-        filtered_playlists = list(filter(None, playlists))
-
-        for i in range(len(filtered_playlists)):
-            filtered_playlists[i] = f"p{filtered_playlists[i]}"
+        filtered_playlists = list()
+        for i in playlists:
+            filtered_playlists.append(str(f"p{i[0]}"))
 
         self.conn.commit()
         return filtered_playlists
@@ -80,10 +81,9 @@ class database:
         cursor = self.conn.execute(get_song_query)
 
         songs = cursor.fetchall()
-        filtered_songs = list(filter(None, songs))
-
-        for i in range(len(filtered_songs)):
-            filtered_songs[i] = f"s{filtered_songs[i]}"
+        filtered_songs = list()
+        for i in songs:
+            filtered_songs.append(str(f"s{i[0]}"))
 
         self.conn.commit()
         return filtered_songs

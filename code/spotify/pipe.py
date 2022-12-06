@@ -16,7 +16,6 @@ class nfc_pipe:
         self.playlists = db.get_playlists()
         self.songs = db.get_songs()
         db.cleanup()
-
         self.p = pipes.Template()
         username = getpass.getuser()        
         username = "/home/"+username
