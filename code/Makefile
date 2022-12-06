@@ -1,6 +1,6 @@
 OUTDIR = $(HOME)/cmpt433/public/myApps/spotabone
 FACERECOG_DIR = facerecog
-CAMERA = $(FACERECOG_DIR)/camera.c
+TOCOPY = $(FACERECOG_DIR)/photodump/ $(FACERECOG_DIR)/samples/ $(FACERECOG_DIR)/stock/ $(FACERECOG_DIR)/camera.c $(FACERECOG_DIR)/Makefile
 
 all: nested-cmodule camera-copy nested-spotify remarks
 
@@ -11,10 +11,10 @@ nested-spotify:
 	make --directory=spotify
 
 camera-copy:
-	cp -r $(CAMERA) $(OUTDIR)
 	mkdir -p $(OUTDIR)/photos
-	cp -r $(FACERECOG_DIR)/* $(OUTDIR)
-	@echo "Copied camera"
+	rm -rf $(OUTDIR)/photos/*
+	cp -r $(TOCOPY) $(OUTDIR)
+	@echo "Copied camera and its dependencies"
 
 remarks:
 	@echo ""
@@ -23,4 +23,3 @@ remarks:
 	@echo "(bbg)$$ make"
 	@echo "(bbg)$$ ./main"
 	@echo "(bbg)$$ ./camera"
-	@echo "(bbg)$$ python3 facerecog.py"
