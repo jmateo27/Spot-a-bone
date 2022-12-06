@@ -35,8 +35,10 @@ void *threadCameraButton(void *arg){
 
 void *threadLCDScreen(void *args)
 {
-    static char msg[50];
+    char msg[50];
     char newMsg[50];
+    int messageLength = 0;
+
     newMsg[0] = '\0';
     FILE *ptr;
     LcdDisplay_init();
@@ -65,7 +67,7 @@ void *threadLCDScreen(void *args)
         }
         newMsg[0] = '\0';
         for (int i = 0; i < 2; i++)
-            scrollText(msg);
+            scrollText(msg, messageLength);
         for (int i = 0; msg[i] != '\0'; i++)
         {
             msg[i] = '\0';

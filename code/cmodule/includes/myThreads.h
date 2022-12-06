@@ -9,6 +9,7 @@
 #include "button.h"
 #include "timing.h"
 #include "communication.h"
+#include "lcd.h"
 
 void *threadNFC(void *arg);
 

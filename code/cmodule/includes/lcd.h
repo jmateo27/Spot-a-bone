@@ -14,6 +14,9 @@
 #include "gpio.h"
 #include "timing.h"
 
+#define NUM_CHARS_ON_DISPLAY 18
+#define SONGS_DIR "/mnt/remote/myApps/spotabone/comms/song.txt"
+
 // Initialize the LCD
 static void LcdDisplay_init();
 // Cleanup the LCD

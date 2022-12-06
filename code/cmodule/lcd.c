@@ -1,9 +1,6 @@
 #include "includes/lcd.h"
 
-#define NUM_CHARS_ON_DISPLAY 18
-#define SONGS_DIR "/mnt/remote/myApps/spotabone/comms/song.txt"
-
-static int messageLength = 0;
+static char msg[50];
 
 static void LcdDisplay_init()
 {
@@ -137,7 +134,7 @@ void clearDisplay()
     return;
 }
 
-void scrollText(char *msg)
+void scrollText(char *msg, int messageLength)
 {
     int j = 0;
     int h;
