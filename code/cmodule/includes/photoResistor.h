@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <sched.h>
 #include <unistd.h>
-#include "timer.h"
+#include "timing.h"
 
 #define A2D_FILE_VOLTAGE33 "/sys/bus/iio/devices/iio:device0/in_voltage4_raw"
 #define A2D_FILE_VOLTAGE35 "/sys/bus/iio/devices/iio:device0/in_voltage6_raw"

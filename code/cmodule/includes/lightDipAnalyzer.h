@@ -2,7 +2,7 @@
 #define _LIGHTDIPANALYZER_H_
 
 #include "photoResistor.h"
-#include "timer.h"
+#include "timing.h"
 #include "musicControl.h"
 #include "button.h"
 #include <pthread.h>

@@ -5,7 +5,6 @@
 #include <string.h>
 
 #include "nfcReader.h"
-#include "motionSensor.h"
 #include "button.h"
 #include "timing.h"
 #include "communication.h"
